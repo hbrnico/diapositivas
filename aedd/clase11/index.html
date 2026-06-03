@@ -240,9 +240,9 @@ cout << a[0]; // Acceso lectura
                 </div>
             </section>
 
-            <!-- Diapositiva 6: Ejercicio 1173 -->
+            <!-- Diapositiva 6: Ejercicio omegaUp 17818 -->
             <section data-background-color="#F8FAFC">
-                <h2 class="slide-title" style="border-left-color: #2563EB;">Beecrowd 1173: Array Fill I</h2>
+                <h2 class="slide-title" style="border-left-color: #2563EB;">omegaUp 17818: El doble del término anterior</h2>
                 <p>Leer un número y ponerlo en la primera posición de un arreglo <code>N[10]</code>. En cada posición subsecuente, colocar el <strong>doble</strong> del anterior.</p>
                 <div class="two-column" style="margin-top: 30px; gap: 30px;">
                     <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0;">
@@ -256,11 +256,11 @@ cout << a[0]; // Acceso lectura
                 </div>
             </section>
 
-            <!-- Grupo de Diapositivas 7: Solución 1173 + Compilador Vertical -->
+            <!-- Grupo de Diapositivas 7: Solución omegaUp 17818 + Compilador Vertical -->
             <section>
-                <!-- Diapositiva 7: Solución 1173 Animada -->
+                <!-- Diapositiva 7: Solución omegaUp 17818 Animada -->
                 <section>
-                    <h2 class="slide-title">Solución: Array Fill I</h2>
+                    <h2 class="slide-title">Solución: El doble del término anterior</h2>
                     <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-3|5-6|8-13|15-19|21-24">
 #include &lt;iostream&gt;
 #define TAM 10
@@ -289,9 +289,9 @@ void imprimir_vector(int V[], int tam){
                     </code></pre>
                 </section>
 
-                <!-- Diapositiva 8: Compilador Interactivo (Abajo de Solución Array Fill I) -->
+                <!-- Diapositiva 8: Compilador Interactivo (Abajo de Solución El doble del término anterior) -->
                 <section id="slide-compiler-1">
-                    <h2 class="slide-title">Ejecución Interactiva: Array Fill I</h2>
+                    <h2 class="slide-title">Ejecución Interactiva: El doble del término anterior</h2>
                     <p style="font-size: 18px; color: var(--text-light); margin-bottom: 10px;">Podés modificar el código, ingresar valores en STDIN y hacer clic en <strong>Run</strong> para compilar.</p>
                     
                     <div class="compiler-window" style="background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15); width: 100%; border: 1px solid #333; margin-top: 10px; text-align: left;">
@@ -309,57 +309,68 @@ void imprimir_vector(int V[], int tam){
                 </section>
             </section>
 
-            <!-- Diapositiva 9: Ejercicio 1171 -->
+            <!-- Diapositiva 9: Ejercicio omegaUp 11232 -->
             <section data-background-color="#F8FAFC">
-                <h2 class="slide-title" style="border-left-color: #2563EB;">Beecrowd 1171: Frecuencias</h2>
-                <p>Leer <strong>N</strong> números enteros positivos (hasta el valor 2000) e imprimir cuántas veces aparece cada uno, ordenados de forma ascendente.</p>
-                <div style="background: white; padding: 25px; border-radius: 12px; border-left: 6px solid var(--utn-gold); margin-top: 30px;">
-                    <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;">Estrategia Clave</h3>
-                    <p style="font-size: 20px; margin: 0;">En lugar de buscar y contar número por número (que sería muy lento), usamos un <strong>arreglo de frecuencias</strong> donde el <i>índice</i> representa el número leído, y el <i>valor</i> es la cantidad de apariciones.</p>
+                <h2 class="slide-title" style="border-left-color: #2563EB;">omegaUp 11232: Frecuencia de una Letra</h2>
+                <p>Leer una palabra <code>p</code> y una letra <code>l</code>. Informar cuántas veces aparece la letra en la palabra.</p>
+                <div class="two-column" style="margin-top: 20px; gap: 30px; margin-bottom: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; text-align: left;">
+                        <h4 style="color: #64748B; font-size: 16px; margin-bottom: 10px;">ENTRADA</h4>
+                        <p style="font-family: monospace; font-size: 20px; font-weight: bold; margin: 0;">panama a</p>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; text-align: left;">
+                        <h4 style="color: #64748B; font-size: 16px; margin-bottom: 10px;">SALIDA ESPERADA</h4>
+                        <p style="font-family: monospace; font-size: 20px; font-weight: bold; margin: 0; color: var(--utn-blue);">3</p>
+                    </div>
+                </div>
+                <div style="background: white; padding: 20px; border-radius: 12px; border-left: 6px solid var(--utn-gold);">
+                    <h3 style="color: var(--utn-blue); font-size: 20px; margin-bottom: 5px;">Estrategia Clave</h3>
+                    <p style="font-size: 18px; margin: 0;">Usamos un <strong>arreglo de frecuencias</strong> (de tamaño 256) donde el <i>índice</i> representa el valor ASCII del carácter, y el <i>valor</i> es su cantidad de apariciones.</p>
                 </div>
             </section>
 
-            <!-- Grupo de Diapositivas 10: Solución 1171 + Compilador Vertical -->
+            <!-- Grupo de Diapositivas 10: Solución 11232 + Compilador Vertical -->
             <section>
-                <!-- Diapositiva 10: Solución 1171 -->
+                <!-- Diapositiva 10: Solución 11232 -->
                 <section>
-                    <h2 class="slide-title">Solución: Frecuencias</h2>
-                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-2|6-10|15-21|22-27">
-#define TAMFRECUENCIAS 20000
-// Inicializamos el arreglo de frecuencias todo en 0 con {}
-// Ej: frecuencias[5] guardará cuántas veces leímos el "5"
+                    <h2 class="slide-title">Solución: Frecuencia de una Letra</h2>
+                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-2|8-13|15-21|23-25">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+void contarFrecuencias(string, int []);
+int obtenerFrecuencia(int [], char);
 
 int main() {
-    int frecuencias[TAMFRECUENCIAS] {};
-    int n;
-    cin &gt;&gt; n;
+    int frecuencias[256] {}; // Inicializa todo en 0
+    string p;
+    char l;
     
-    ingresaElementos(frecuencias, n);
-    imprimeFrecuencias(frecuencias);
+    if (cin &gt;&gt; p &gt;&gt; l) {
+        contarFrecuencias(p, frecuencias);
+        cout &lt;&lt; obtenerFrecuencia(frecuencias, l) &lt;&lt; endl;
+    }
     return 0;
 }
 
-void ingresaElementos(int frecuencias[], int n) {
-    for (int i = 0; i &lt; n; i++) {
-        int ingreso;
-        cin &gt;&gt; ingreso;
-        frecuencias[ingreso]++; // Magia: Acumulamos directamente en el índice!
+void contarFrecuencias(string palabra, int frecuencias[]) {
+    for (int i = 0; i &lt; palabra.length(); i++) {
+        char caracter = palabra[i];
+        frecuencias[caracter]++; // Magia: Acumulamos directamente en el índice ASCII!
     }
 }
 
-void imprimeFrecuencias(int frecuencias[]) {
-    for (int i = 0; i &lt; TAMFRECUENCIAS; i++) {
-        if (frecuencias[i] != 0) 
-            cout &lt;&lt; i &lt;&lt; " aparece " &lt;&lt; frecuencias[i] &lt;&lt; " vez(es)" &lt;&lt; endl;
-    }
+int obtenerFrecuencia(int frecuencias[], char letra) {
+    return frecuencias[letra];
 }
                     </code></pre>
                 </section>
 
-                <!-- Diapositiva Vertical: Compilador para Frecuencias -->
+                <!-- Diapositiva Vertical: Compilador para Frecuencia de una Letra -->
                 <section id="slide-compiler-2">
-                    <h2 class="slide-title">Ejecución Interactiva: Frecuencias</h2>
-                    <p style="font-size: 18px; color: var(--text-light); margin-bottom: 10px;">Podés modificar el código, ingresar valores en STDIN (ej: <code>4 2 5 2 8</code>) y hacer clic en <strong>Run</strong>.</p>
+                    <h2 class="slide-title">Ejecución Interactiva: Frecuencia de una Letra</h2>
+                    <p style="font-size: 18px; color: var(--text-light); margin-bottom: 10px;">Podés modificar el código, ingresar valores en STDIN (ej: <code>panama a</code>) y hacer clic en <strong>Run</strong>.</p>
                     
                     <div class="compiler-window" style="background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15); width: 100%; border: 1px solid #333; margin-top: 10px; text-align: left;">
                         <div class="header" style="background: #252526; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3c3c3c; line-height: 1;">
@@ -580,37 +591,35 @@ void imprimir_vector(int V[], int tam){
         cout << "N[" << i << "] = " << V[i] << endl;
 }`;
 
-        // Código C++ a pre-cargar en OneCompiler para Frecuencias
+        // Código C++ a pre-cargar en OneCompiler para Frecuencia de una Letra
         const cppCodeFrecuencias = `#include <iostream>
-#define TAMFRECUENCIAS 20000
+#include <string>
 using namespace std;
 
-void ingresaElementos(int [], int);
-void imprimeFrecuencias(int []);
+void contarFrecuencias(string, int []);
+int obtenerFrecuencia(int [], char);
 
 int main() {
-    int frecuencias[TAMFRECUENCIAS] {};
-    int n;
-    cin >> n;
+    int frecuencias[256] {}; // Inicializa todo en 0
+    string p;
+    char l;
     
-    ingresaElementos(frecuencias, n);
-    imprimeFrecuencias(frecuencias);
+    if (cin >> p >> l) {
+        contarFrecuencias(p, frecuencias);
+        cout << obtenerFrecuencia(frecuencias, l) << endl;
+    }
     return 0;
 }
 
-void ingresaElementos(int frecuencias[], int n) {
-    for (int i = 0; i < n; i++) {
-        int ingreso;
-        cin >> ingreso;
-        frecuencias[ingreso]++; // Magia: Acumulamos directamente en el índice!
+void contarFrecuencias(string palabra, int frecuencias[]) {
+    for (int i = 0; i < palabra.length(); i++) {
+        char caracter = palabra[i];
+        frecuencias[caracter]++; // Magia: Acumulamos directamente en el índice ASCII!
     }
 }
 
-void imprimeFrecuencias(int frecuencias[]) {
-    for (int i = 0; i < TAMFRECUENCIAS; i++) {
-        if (frecuencias[i] != 0) 
-            cout << i << " aparece " << frecuencias[i] << " vez(es)" << endl;
-    }
+int obtenerFrecuencia(int frecuencias[], char letra) {
+    return frecuencias[letra];
 }`;
 
         // Código C++ a pre-cargar en OneCompiler para Ejercicio Avanzado
