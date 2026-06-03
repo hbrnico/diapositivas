@@ -74,6 +74,34 @@
 
         .branding-footer { position: absolute; bottom: 30px; left: 40px; color: #94A3B8; font-weight: 600; font-size: 14px; letter-spacing: 1px; z-index: 1000; }
         .branding-footer span { color: var(--utn-gold); }
+
+        /* --- Estilos Especiales para Celulares Verticales --- */
+        @media (max-aspect-ratio: 1/1) {
+            .two-column { grid-template-columns: 1fr; gap: 30px; }
+            .tiled-content { flex-direction: column; gap: 20px; }
+            
+            /* Ajustes de tipografía para compensar el lienzo angosto */
+            .slide-title { font-size: 60px !important; margin-bottom: 25px !important; }
+            .reveal p, .reveal li { font-size: 28px; }
+            
+            /* Ajuste de códigos para evitar overflow */
+            .reveal pre { font-size: 20px; padding: 25px; overflow-x: auto; width: 100%; box-sizing: border-box; }
+            
+            /* Reducir altura de la imagen a media pantalla para no pisar el texto */
+            .bleed-image-side { height: 350px; }
+            
+            /* Ajuste de título grande central */
+            .section-title-layout h2 { font-size: 100px !important; }
+            .section-title-layout p { font-size: 28px !important; }
+
+            /* Tarjetas de íconos más compactas */
+            .tile { padding: 25px; }
+            .tile .icon { font-size: 40px; margin-bottom: 15px; }
+            .tile h3 { font-size: 24px; }
+            
+            /* Footer */
+            .branding-footer { bottom: 20px; left: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -354,9 +382,19 @@ q.<span class="kw">offer</span>(<span class="str">"Maria"</span>);
     <script src="../../dist/plugin/highlight.js"></script>
     
     <script>
+        function getCanvasSize() {
+            let isPortrait = window.innerHeight > window.innerWidth;
+            return {
+                width: isPortrait ? 720 : 1280,
+                height: isPortrait ? 1280 : 720
+            };
+        }
+
+        let initialSize = getCanvasSize();
+
         Reveal.initialize({
-            width: 1280,
-            height: 720,
+            width: initialSize.width,
+            height: initialSize.height,
             margin: 0.08,
             minScale: 0.2,
             maxScale: 2.0,
@@ -369,6 +407,15 @@ q.<span class="kw">offer</span>(<span class="str">"Maria"</span>);
             center: true,
             
             plugins: [ RevealHighlight, RevealNotes ]
+        });
+
+        // Recalcular tamaño si gira el teléfono
+        window.addEventListener('resize', () => {
+            let newSize = getCanvasSize();
+            Reveal.configure({
+                width: newSize.width,
+                height: newSize.height
+            });
         });
     </script>
 </body>
