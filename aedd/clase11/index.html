@@ -509,6 +509,24 @@ int sumaDigitos(int numero) {
             };
         }
 
+        // Detectar si es un dispositivo móvil o tablet para simplificar el flujo
+        const isMobileOrTablet = window.innerWidth < 992;
+        if (isMobileOrTablet) {
+            // Eliminar los compiladores verticales para evitar problemas de gestos y teclado en celulares
+            document.querySelectorAll('[id^="slide-compiler-"]').forEach(el => el.remove());
+            
+            // Aplanar las diapositivas para que no queden secciones anidadas vacías o de un solo hijo
+            document.querySelectorAll('section > section').forEach(sec => {
+                const parent = sec.parentNode;
+                if (parent && parent.children.length === 1) {
+                    while (sec.firstChild) {
+                        parent.appendChild(sec.firstChild);
+                    }
+                    sec.remove();
+                }
+            });
+        }
+
         let initialSize = getCanvasSize();
 
         Reveal.initialize({
