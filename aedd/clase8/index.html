@@ -334,7 +334,7 @@ void imprimir_vector(int V[], int tam){
                 <!-- Diapositiva 10: Solución 11232 -->
                 <section>
                     <h2 class="slide-title">Solución: Frecuencia de una Letra</h2>
-                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-6|8-18|20-25|27-29">
+                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-6|8-17|19-24|26-28">
 #include &lt;iostream&gt;
 #include &lt;string&gt;
 using namespace std;
@@ -347,10 +347,9 @@ int main() {
     string p;
     char l;
     
-    if (cin &gt;&gt; p &gt;&gt; l) {
-        contarFrecuencias(p, frecuencias);
-        cout &lt;&lt; obtenerFrecuencia(frecuencias, l) &lt;&lt; endl;
-    }
+    cin &gt;&gt; p &gt;&gt; l;
+    contarFrecuencias(p, frecuencias);
+    cout &lt;&lt; obtenerFrecuencia(frecuencias, l) &lt;&lt; endl;
     return 0;
 }
 
@@ -604,10 +603,9 @@ int main() {
     string p;
     char l;
     
-    if (cin >> p >> l) {
-        contarFrecuencias(p, frecuencias);
-        cout << obtenerFrecuencia(frecuencias, l) << endl;
-    }
+    cin >> p >> l;
+    contarFrecuencias(p, frecuencias);
+    cout << obtenerFrecuencia(frecuencias, l) << endl;
     return 0;
 }
 
