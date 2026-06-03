@@ -288,57 +288,22 @@ void imprimir_vector(int V[], int tam){
             </section>
 
             <!-- Diapositiva 8: Compilador Interactivo NATIVO -->
-            <section>
+            <section id="slide-compiler">
                 <h2 class="slide-title">Ejecución Interactiva</h2>
-                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 15px;">Hacé clic en la consola, ingresá un número y apretá <kbd>Enter</kbd>.</p>
+                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 10px;">Podés modificar el código, ingresar valores en STDIN y hacer clic en <strong>Run</strong> para compilar.</p>
                 
-                <div class="interactive-terminal" onclick="document.getElementById('term-input').focus()">
-                    <div class="header">
-                        <span>bash - mingw64 - array_fill.exe</span>
-                        <span style="color: #444;">&#9679; &#9679; &#9679;</span>
-                    </div>
-                    <div id="term-content">
-                        <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
-                        <div style="display: flex; align-items: center;" id="input-row">
-                            <span style="color: #ffcc00; font-weight: bold;">STDIN > </span>
-                            <input type="number" id="term-input" class="term-input" placeholder="Escribe un número aquí..." onkeypress="handleTerminal(event)">
+                <div class="compiler-window" style="background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15); width: 100%; border: 1px solid #333; margin-top: 10px; text-align: left;">
+                    <div class="header" style="background: #252526; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3c3c3c; line-height: 1;">
+                        <span style="color: #cccccc; font-family: monospace; font-size: 14px; display: flex; align-items: center;"><i class="fa-solid fa-code" style="color: var(--utn-gold); margin-right: 8px;"></i> Compilador Online (OneCompiler)</span>
+                        <div style="display: flex; gap: 15px; align-items: center;">
+                            <button onclick="sendCode()" style="background: var(--utn-gold); border: none; padding: 6px 12px; border-radius: 4px; color: var(--utn-blue); font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+                                <i class="fa-solid fa-rotate-left"></i> Restaurar Código
+                            </button>
+                            <span style="color: #888; font-size: 14px;">&#9679; &#9679; &#9679;</span>
                         </div>
                     </div>
+                    <iframe id="oc-editor" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true" style="width: 100%; height: 400px; border: none; display: block;"></iframe>
                 </div>
-
-                <script>
-                    function handleTerminal(e) {
-                        if (e.key === 'Enter') {
-                            let inputVal = document.getElementById('term-input').value;
-                            if (!inputVal) return;
-                            
-                            let v = parseInt(inputVal);
-                            let outputHtml = `<div style="color: #888; margin-bottom: 10px;">> ${v}</div>`;
-                            let current = v;
-                            for (let i = 0; i < 10; i++) {
-                                outputHtml += `<div class="term-output">N[${i}] = ${current}</div>`;
-                                current *= 2;
-                            }
-                            outputHtml += `<div style="color: #00ff00; margin-top: 15px;">[Process completed (exit code 0)]</div>`;
-                            outputHtml += `<div style="color: #888; margin-top: 5px; font-size: 14px; cursor: pointer;" onclick="resetTerminal()">$ Presiona aquí para reiniciar...</div>`;
-                            
-                            document.getElementById('term-content').innerHTML = `
-                                <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
-                            ` + outputHtml;
-                        }
-                    }
-
-                    function resetTerminal() {
-                        document.getElementById('term-content').innerHTML = `
-                            <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
-                            <div style="display: flex; align-items: center;" id="input-row">
-                                <span style="color: #ffcc00; font-weight: bold;">STDIN > </span>
-                                <input type="number" id="term-input" class="term-input" placeholder="Escribe un número aquí..." onkeypress="handleTerminal(event)">
-                            </div>
-                        `;
-                        setTimeout(() => document.getElementById('term-input').focus(), 100);
-                    }
-                </script>
             </section>
 
             <!-- Diapositiva 9: Ejercicio 1171 -->
@@ -522,6 +487,73 @@ int sumaDigitos(int numero) {
                 width: newSize.width,
                 height: newSize.height
             });
+        });
+
+        // Código C++ a pre-cargar en OneCompiler
+        const cppCode = `#include <iostream>
+#define TAM 10
+using namespace std;
+
+void inicializar_teclado(int [], int);
+void imprimir_vector(int [], int);
+
+int main() {
+    int vector[TAM];
+    inicializar_teclado(vector, TAM);
+    imprimir_vector(vector, TAM);
+    return 0;
+}
+
+void inicializar_teclado(int V[], int tam){
+    cin >> V[0];
+    for(int i=1; i<tam; i++)
+        V[i] = 2 * V[i-1];
+}
+    
+void imprimir_vector(int V[], int tam){
+    for(int i=0; i<tam; i++)
+        cout << "N[" << i << "] = " << V[i] << endl;
+}`;
+
+        // Función para enviar el código al iframe de OneCompiler
+        function sendCode() {
+            const iframe = document.getElementById('oc-editor');
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({
+                    eventType: 'populateCode',
+                    language: 'cpp',
+                    files: [
+                        {
+                            name: 'main.cpp',
+                            content: cppCode
+                        }
+                    ]
+                }, '*');
+            }
+        }
+
+        // Se envía el código en varios momentos clave para contrarrestar problemas de carga asíncrona
+        function sendCodeWithRetries() {
+            sendCode();
+            setTimeout(sendCode, 200);
+            setTimeout(sendCode, 500);
+            setTimeout(sendCode, 1000);
+            setTimeout(sendCode, 2000);
+            setTimeout(sendCode, 3500);
+        }
+
+        // Escuchar cuando el usuario entra en la diapositiva del compilador
+        Reveal.on('slidechanged', event => {
+            if (event.currentSlide && event.currentSlide.id === 'slide-compiler') {
+                sendCodeWithRetries();
+            }
+        });
+
+        // Escuchar cuando Reveal se ha inicializado
+        Reveal.on('ready', event => {
+            if (Reveal.getCurrentSlide() && Reveal.getCurrentSlide().id === 'slide-compiler') {
+                sendCodeWithRetries();
+            }
         });
     </script>
 </body>
