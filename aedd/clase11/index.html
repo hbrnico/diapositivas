@@ -124,6 +124,7 @@
             display: none; justify-content: center; align-items: center;
             cursor: pointer; border-radius: 0 0 12px 12px;
             backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+            touch-action: none; /* Evita que el navegador intercepte gestos verticales, permitiendo deslizar slides en móviles */
         }
         @media (max-width: 991px) {
             .mobile-iframe-overlay { display: flex !important; }
@@ -572,6 +573,9 @@ int sumaDigitos(int numero) {
             controls: true,
             progress: true,
             center: true,
+            
+            // Desactiva el modo de vista de scroll continuo automático en móviles
+            scrollActivationWidth: 0,
             
             plugins: [ RevealHighlight, RevealNotes ]
         });
