@@ -520,8 +520,8 @@ int sumaDigitos(int numero) {
             };
         }
 
-        // Detectar si es un dispositivo móvil o tablet para simplificar el flujo
-        const isMobileOrTablet = window.innerWidth < 992;
+        // Detectar si es un dispositivo móvil chico (celular) para simplificar el flujo
+        const isMobileOrTablet = window.innerWidth < 768;
         if (isMobileOrTablet) {
             // Eliminar los compiladores verticales para evitar problemas de gestos y teclado en celulares
             document.querySelectorAll('[id^="slide-compiler-"]').forEach(el => el.remove());
