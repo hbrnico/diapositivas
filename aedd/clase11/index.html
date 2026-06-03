@@ -277,8 +277,25 @@ void imprimir_vector(int V[], int tam){
             <!-- Diapositiva 8: Compilador Interactivo -->
             <section>
                 <h2 class="slide-title">Simulación en Vivo</h2>
-                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 15px;">El código ya está cargado y la entrada estándar (STDIN) lista. ¡Hacé clic en "Run"!</p>
-                <iframe src="https://onecompiler.com/embed/cpp?code=%23include%20%3Ciostream%3E%0Ausing%20namespace%20std%3B%0A%0Avoid%20inicializar_teclado(int%20%5B%5D%2C%20int)%3B%0Avoid%20imprimir_vector(int%20%5B%5D%2C%20int)%3B%0A%0Aint%20main()%20%7B%0A%20%20%20%20int%20vector%5B10%5D%3B%0A%20%20%20%20inicializar_teclado(vector%2C%2010)%3B%0A%20%20%20%20imprimir_vector(vector%2C%2010)%3B%0A%20%20%20%20return%200%3B%0A%7D%0A%0Avoid%20inicializar_teclado(int%20V%5B%5D%2C%20int%20tam)%7B%0A%20%20%20%20cin%20%3E%3E%20V%5B0%5D%3B%0A%20%20%20%20for(int%20i%3D1%3B%20i%3Ctam%3B%20i%2B%2B)%0A%20%20%20%20%20%20%20%20V%5Bi%5D%20%3D%202%20%2A%20V%5Bi-1%5D%3B%0A%7D%0A%0Avoid%20imprimir_vector(int%20V%5B%5D%2C%20int%20tam)%7B%0A%20%20%20%20for(int%20i%3D0%3B%20i%3Ctam%3B%20i%2B%2B)%0A%20%20%20%20%20%20%20%20cout%20%3C%3C%20%22N%5B%22%20%3C%3C%20i%20%3C%3C%20%22%5D%20%3D%20%22%20%3C%3C%20V%5Bi%5D%20%3C%3C%20endl%3B%0A%7D&stdin=1" width="100%" height="500px" style="border:0; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"></iframe>
+                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 15px;">El código ya está cargado automáticamente. Ingresá el valor en STDIN y dale a "Run".</p>
+                <iframe id="oc-iframe" src="https://onecompiler.com/embed/cpp" width="100%" height="500px" style="border:0; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);"></iframe>
+                <script>
+                    window.addEventListener('message', function(e) {
+                        if (e.data && e.data.event === 'onLoad') {
+                            var iframe = document.getElementById('oc-iframe');
+                            if (iframe && iframe.contentWindow) {
+                                iframe.contentWindow.postMessage({
+                                    eventType: 'populateCode',
+                                    language: 'cpp',
+                                    files: [{
+                                        name: 'main.cpp',
+                                        content: '#include <iostream>\n#define TAM 10\nusing namespace std;\n\nvoid inicializar_teclado(int [], int);\nvoid imprimir_vector(int [], int);\n\nint main() {\n    int vector[TAM];\n    inicializar_teclado(vector, TAM);\n    imprimir_vector(vector, TAM);\n    return 0;\n}\n\nvoid inicializar_teclado(int V[], int tam){\n    cin >> V[0];\n    for(int i=1; i<tam; i++)\n        V[i] = 2 * V[i-1];\n}\n    \nvoid imprimir_vector(int V[], int tam){\n    for(int i=0; i<tam; i++)\n        cout << "N[" << i << "] = " << V[i] << endl;\n}'
+                                    }]
+                                }, "*");
+                            }
+                        }
+                    });
+                </script>
             </section>
 
             <!-- Diapositiva 9: Ejercicio 1171 -->
