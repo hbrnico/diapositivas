@@ -63,6 +63,19 @@
         .branding-footer { position: absolute; bottom: 30px; left: 40px; color: #94A3B8; font-weight: 600; font-size: 14px; letter-spacing: 1px; z-index: 1000; }
         .branding-footer span { color: var(--utn-gold); }
 
+        /* Terminal Interactiva a medida */
+        .interactive-terminal {
+            background-color: #1e1e1e; border-radius: 10px; padding: 20px; font-family: 'Fira Code', monospace;
+            color: #00ff00; text-align: left; font-size: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid #333; width: 100%; max-height: 400px; overflow-y: auto; cursor: text;
+        }
+        .interactive-terminal .header { border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; color: #888; font-size: 16px; display: flex; justify-content: space-between;}
+        .interactive-terminal .term-input {
+            background: transparent; border: none; color: #fff; font-family: 'Fira Code', monospace; font-size: 20px;
+            outline: none; width: 80%; margin-left: 10px;
+        }
+        .interactive-terminal .term-output { color: #cccccc; margin-top: 5px; }
+
         /* Gráficos Vectoriales de Arreglos */
         .array-diagram { display: inline-flex; border: 2px solid var(--text-main); border-radius: 4px; overflow: visible; margin-top: 20px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .array-cell { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-right: 2px solid var(--text-main); font-family: 'Fira Code', monospace; font-size: 24px; font-weight: bold; position: relative; background: white; }
@@ -274,37 +287,58 @@ void imprimir_vector(int V[], int tam){
                 </code></pre>
             </section>
 
-            <!-- Diapositiva 8: Compilador Interactivo -->
+            <!-- Diapositiva 8: Compilador Interactivo NATIVO -->
             <section>
-                <h2 class="slide-title">Simulación en Vivo</h2>
-                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 15px;">El código ya está cargado automáticamente. Ingresá el valor en STDIN y dale a "Execute".</p>
-                <div data-pym-src="https://www.jdoodle.com/embed/v0/2?stdin=1&il=cpp14">
-#include &lt;iostream&gt;
-#define TAM 10
-using namespace std;
-
-void inicializar_teclado(int [], int);
-void imprimir_vector(int [], int);
-
-int main() {
-    int vector[TAM];
-    inicializar_teclado(vector, TAM);
-    imprimir_vector(vector, TAM);
-    return 0;
-}
-
-void inicializar_teclado(int V[], int tam){
-    cin &gt;&gt; V[0];
-    for(int i=1; i&lt;tam; i++)
-        V[i] = 2 * V[i-1];
-}
-    
-void imprimir_vector(int V[], int tam){
-    for(int i=0; i&lt;tam; i++)
-        cout &lt;&lt; "N[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; V[i] &lt;&lt; endl;
-}
+                <h2 class="slide-title">Ejecución Interactiva</h2>
+                <p style="font-size: 18px; color: var(--text-light); margin-bottom: 15px;">Hacé clic en la consola, ingresá un número y apretá <kbd>Enter</kbd>.</p>
+                
+                <div class="interactive-terminal" onclick="document.getElementById('term-input').focus()">
+                    <div class="header">
+                        <span>bash - mingw64 - array_fill.exe</span>
+                        <span style="color: #444;">&#9679; &#9679; &#9679;</span>
+                    </div>
+                    <div id="term-content">
+                        <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
+                        <div style="display: flex; align-items: center;" id="input-row">
+                            <span style="color: #ffcc00; font-weight: bold;">STDIN > </span>
+                            <input type="number" id="term-input" class="term-input" placeholder="Escribe un número aquí..." onkeypress="handleTerminal(event)">
+                        </div>
+                    </div>
                 </div>
-                <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+
+                <script>
+                    function handleTerminal(e) {
+                        if (e.key === 'Enter') {
+                            let inputVal = document.getElementById('term-input').value;
+                            if (!inputVal) return;
+                            
+                            let v = parseInt(inputVal);
+                            let outputHtml = `<div style="color: #888; margin-bottom: 10px;">> ${v}</div>`;
+                            let current = v;
+                            for (let i = 0; i < 10; i++) {
+                                outputHtml += `<div class="term-output">N[${i}] = ${current}</div>`;
+                                current *= 2;
+                            }
+                            outputHtml += `<div style="color: #00ff00; margin-top: 15px;">[Process completed (exit code 0)]</div>`;
+                            outputHtml += `<div style="color: #888; margin-top: 5px; font-size: 14px; cursor: pointer;" onclick="resetTerminal()">$ Presiona aquí para reiniciar...</div>`;
+                            
+                            document.getElementById('term-content').innerHTML = `
+                                <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
+                            ` + outputHtml;
+                        }
+                    }
+
+                    function resetTerminal() {
+                        document.getElementById('term-content').innerHTML = `
+                            <div style="color: #fff; margin-bottom: 10px;">$ ./array_fill.exe</div>
+                            <div style="display: flex; align-items: center;" id="input-row">
+                                <span style="color: #ffcc00; font-weight: bold;">STDIN > </span>
+                                <input type="number" id="term-input" class="term-input" placeholder="Escribe un número aquí..." onkeypress="handleTerminal(event)">
+                            </div>
+                        `;
+                        setTimeout(() => document.getElementById('term-input').focus(), 100);
+                    }
+                </script>
             </section>
 
             <!-- Diapositiva 9: Ejercicio 1171 -->
