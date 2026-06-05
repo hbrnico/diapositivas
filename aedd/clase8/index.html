@@ -470,6 +470,49 @@ int sumaDigitos(int numero) {
                     </code></pre>
                 </section>
 
+                <!-- Diapositiva Vertical: Solución Alternativa (Presencia / Frecuencias) -->
+                <section>
+                    <h2 class="slide-title">Solución Alternativa: Registro de Presencia</h2>
+                    <p style="font-size: 20px; margin-bottom: 25px;">Como los números iniciales son menores a 30, podemos usar un arreglo de presencia (booleano) de tamaño 30. Guardamos <code>true</code> en los índices correspondientes a los números leídos para lograr búsquedas directas en tiempo constante $O(1)$.</p>
+                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1-5|7-20|22-30|32-35">
+#include &lt;iostream&gt;
+using namespace std;
+
+void cargarPresencia(bool [], int, int);
+int sumaDigitos(int);
+
+int main() {
+    bool presencia[30] {false}; // Registra presencia
+    cargarPresencia(presencia, 30, 10);
+    
+    int ingreso, suma;
+    do {
+        cout &lt;&lt; "Ingrese un numero:" &lt;&lt; endl;
+        cin &gt;&gt; ingreso;
+        suma = sumaDigitos(ingreso);
+    } while(suma &gt;= 30 || !presencia[suma]); // Búsqueda directa O(1)
+    
+    cout &lt;&lt; "Cumple condicion: " &lt;&lt; ingreso &lt;&lt; endl;
+    return 0;
+}
+
+void cargarPresencia(bool P[], int tam, int cant) {
+    int valor;
+    for (int i = 0; i &lt; cant; i++) {
+        cin &gt;&gt; valor;
+        if (valor &gt;= 0 && valor &lt; tam) {
+            P[valor] = true; // Marcamos que este valor apareció
+        }
+    }
+}
+
+int sumaDigitos(int numero) {
+    if (numero &lt; 10) return numero;
+    return numero % 10 + sumaDigitos(numero/10); // Recursividad
+}
+                    </code></pre>
+                </section>
+
                 <!-- Diapositiva Vertical: Compilador para Ejercicio Avanzado -->
                 <section id="slide-compiler-3">
                     <h2 class="slide-title">Ejecución Interactiva: Ejercicio Avanzado</h2>
@@ -659,7 +702,50 @@ bool existeNumero(int V[], int tam, int buscado) {
 int sumaDigitos(int numero) {
     if (numero < 10) return numero;
     return numero % 10 + sumaDigitos(numero/10); // Recursividad elegante
-}`;
+}
+
+/*
+// ==========================================
+// SOLUCIÓN ALTERNATIVA (Registro de Presencia)
+// ==========================================
+
+#include <iostream>
+using namespace std;
+
+void cargarPresencia(bool P[], int tam, int cant) {
+    int valor;
+    for (int i = 0; i < cant; i++) {
+        cin >> valor;
+        if (valor >= 0 && valor < tam) {
+            P[valor] = true;
+        }
+    }
+}
+
+int sumaDigitos(int numero) {
+    if (numero < 10) return numero;
+    return numero % 10 + sumaDigitos(numero/10);
+}
+
+int main() {
+    bool presencia[30] {false};
+    // Inicialización de prueba para testing en consola interactiva:
+    // (Podes usar cargarPresencia si provees los 10 valores iniciales en STDIN)
+    presencia[1] = true;  // Simulando valores iniciales leídos
+    presencia[6] = true;
+    presencia[19] = true;
+    
+    int ingreso, suma;
+    do {
+        cout << "Ingrese un numero:" << endl;
+        cin >> ingreso;
+        suma = sumaDigitos(ingreso);
+    } while(suma >= 30 || !presencia[suma]); // O(1)
+    
+    cout << "Cumple condicion: " << ingreso << endl;
+    return 0;
+}
+*/`;
 
         // Función para enviar el código a un iframe de OneCompiler específico
         function sendCode(iframeId, code) {
