@@ -669,7 +669,7 @@ using namespace std;
 
 void inicializaArreglo(int V[], int tam) {
     for (int i = 0; i < tam; i++) {
-        V[i] = (i + 1) * 3 - 2; // Valores iniciales de prueba
+        cin >> V[i];
     }
 }
 
@@ -729,12 +729,7 @@ int sumaDigitos(int numero) {
 
 int main() {
     bool presencia[30] {false};
-    // Inicialización de prueba para testing en consola interactiva:
-    // (Podes usar cargarPresencia si provees los 10 valores iniciales en STDIN)
-    for (int i = 0; i < 10; i++) {
-        int valor = (i + 1) * 3 - 2;
-        if (valor >= 0 && valor < 30) presencia[valor] = true;
-    }
+    cargarPresencia(presencia, 30, 10);
     
     int ingreso, suma;
     do {
