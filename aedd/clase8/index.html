@@ -731,9 +731,10 @@ int main() {
     bool presencia[30] {false};
     // Inicialización de prueba para testing en consola interactiva:
     // (Podes usar cargarPresencia si provees los 10 valores iniciales en STDIN)
-    presencia[1] = true;  // Simulando valores iniciales leídos
-    presencia[6] = true;
-    presencia[19] = true;
+    for (int i = 0; i < 10; i++) {
+        int valor = (i + 1) * 3 - 2;
+        if (valor >= 0 && valor < 30) presencia[valor] = true;
+    }
     
     int ingreso, suma;
     do {
