@@ -449,10 +449,11 @@ void eliminarRepetidos(int V[], int &n, int &paresEliminados, double &promedioRe
                     <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; border-left: 6px solid var(--utn-gold); text-align: left; margin-bottom: 10px;">
                         <h4 style="color: var(--utn-blue); font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-circle-question"></i> Ejemplo:</h4>
                         <p style="font-size: 16px; margin: 0; font-family: monospace;">
-                            Original: [2, <strong>5</strong>, 8, 9, 12, <strong>15</strong>, 20, 22]<br>
-                            El 5 está entre 2 y 8 (pares). Se elimina.<br>
-                            El 15 está entre 12 y 20 (pares). Se elimina.<br>
-                            Resultado: [2, 8, 9, 12, 20, 22]. Pares sucesivos restantes: (2,8), (8,12), (12,20), (20,22).<br>
+                            Original: [2, <strong>5</strong>, 8, 9, 11, 12, <strong>15</strong>, 20, 22]<br>
+                            El 5 está entre 2 y 8 (pares) &rarr; Se elimina.<br>
+                            El 9 y 11 están pegados (uno al lado del otro) &rarr; Se conservan.<br>
+                            El 15 está entre 12 y 20 (pares) &rarr; Se elimina.<br>
+                            Resultado: [2, 8, 9, 11, 12, 20, 22]. Pares sucesivos: (2,8), (8,12), (12,20), (20,22).<br>
                             Mayor diferencia: 20 - 12 = 8.
                         </p>
                     </div>
@@ -863,8 +864,8 @@ void imprimir(int arreglo[], int tam) {
 }
 
 int main() {
-    int v[10] = {2, 5, 8, 9, 12, 15, 20, 22};
-    int n = 8;
+    int v[10] = {2, 5, 8, 9, 11, 12, 15, 20, 22};
+    int n = 9;
     
     cout << "Original (tam = " << n << "): ";
     imprimir(v, n);
