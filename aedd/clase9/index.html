@@ -140,14 +140,19 @@
                         </div>
                         <div>
                             <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;">Implementación C++</h3>
-                            <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|2|3-6|7|8">
+                            <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|2-4|5|6-9|10|12">
 int buscaElemento(int arreglo[], int tam, int elemento) {
+    int pos = -1;
+    bool encontrado = false;
     int i = 0;
-    while (i < tam) {
-        if (arreglo[i] == elemento) return i;
+    while (i < tam && !encontrado) {
+        if (arreglo[i] == elemento) {
+            pos = i;
+            encontrado = true;
+        }
         i++;
     }
-    return -1; // No encontrado
+    return pos;
 }
                             </code></pre>
                         </div>
@@ -184,8 +189,8 @@ int buscaElemento(int arreglo[], int tam, int elemento) {
                         <h3 style="color: var(--utn-blue); font-size: 24px; margin-bottom: 10px;">La idea de los Límites (Invariante):</h3>
                         <p style="font-size: 18px; margin-bottom: 5px;">Mantenemos dos índices de frontera:</p>
                         <ul style="font-size: 18px; margin-bottom: 15px; padding-left: 20px;">
-                            <li><code>a</code>: El último elemento conocido que **no cumple** la condición (ej: menor que el valor buscado). Al inicio es <code>-1</code>.</li>
-                            <li><code>b</code>: El primer elemento conocido que **sí cumple** la condición (ej: mayor o igual). Al inicio es <code>tam</code>.</li>
+                            <li><code>a</code>: El último elemento conocido que <strong>no cumple</strong> la condición (ej: menor que el valor buscado). Al inicio es <code>-1</code>.</li>
+                            <li><code>b</code>: El primer elemento conocido que <strong>sí cumple</strong> la condición (ej: mayor o igual). Al inicio es <code>tam</code>.</li>
                         </ul>
                         <p style="font-size: 18px; font-weight: bold;">Mientras queden elementos entre ambos (<code>b - a > 1</code>):</p>
                         <p style="font-size: 18px;">Calculamos la mitad <code>c = (a + b) / 2</code>. Si <code>arreglo[c]</code> cumple, movemos la frontera <code>b = c</code>. Si no, movemos <code>a = c</code>.</p>
@@ -256,49 +261,6 @@ int busquedaBinaria(int arreglo[], int tam, int elemento) {
                 </div>
             </section>
 
-            <!-- Ejercicio 14: Rotar Izquierda -->
-            <section>
-                <section>
-                    <h2 class="slide-title">Ejercicio 14: Rotar a la Izquierda</h2>
-                    <p style="font-size: 24px; margin-bottom: 30px;">Escribir una función que permita rotar una posición a la izquierda todos los elementos de un vector. La rotación es **circular** (el elemento en la posición 0 pasa al final).</p>
-                    
-                    <div style="background: var(--bg-neutral); padding: 30px; border-radius: 16px; margin-bottom: 20px; border-left: 6px solid var(--utn-gold);">
-                        <h4 style="color: var(--utn-blue); margin-bottom: 10px; font-size: 20px;"><i class="fa-solid fa-circle-play"></i> Ejemplo de Ejecución:</h4>
-                        <p style="font-size: 22px; font-family: monospace; font-weight: bold; margin: 0;">rotar_izquierda([1, 2, 3, 4], 4) &rarr; [2, 3, 4, 1]</p>
-                    </div>
-                </section>
-
-                <section>
-                    <h2 class="slide-title">Solución: Ejercicio 14</h2>
-                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|2|3|4|5|6|7|8|9">
-void rotar_izquierda(int arreglo[], int tam) {
-    if (tam > 0) {
-        int elementoCero = arreglo[0]; // Respaldamos el primer elemento
-        for (int i = 0; i < tam - 1; i++) {
-            arreglo[i] = arreglo[i + 1]; // Desplazamos a la izquierda
-        }
-        arreglo[tam - 1] = elementoCero; // El respaldado pasa al final
-    }
-}
-                    </code></pre>
-                </section>
-
-                <section id="slide-compiler-rotar">
-                    <h2 class="slide-title">Ejecución Interactiva: Ejercicio 14</h2>
-                    <div class="compiler-window" style="background: #1e1e1e; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15); width: 100%; border: 1px solid #333; text-align: left;">
-                        <div class="header" style="background: #252526; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3c3c3c; line-height: 1;">
-                            <span style="color: #cccccc; font-family: monospace; font-size: 14px; display: flex; align-items: center;"><i class="fa-solid fa-code" style="color: var(--utn-gold); margin-right: 8px;"></i> Compilador Online (OneCompiler)</span>
-                            <div style="display: flex; gap: 15px; align-items: center;">
-                                <button onclick="sendCode('oc-editor-rotar', cppCodeRotar)" style="background: var(--utn-gold); border: none; padding: 6px 12px; border-radius: 4px; color: var(--utn-blue); font-weight: bold; font-size: 13px; cursor: pointer;">
-                                    <i class="fa-solid fa-rotate-left"></i> Restaurar Código
-                                </button>
-                                <span style="color: #888; font-size: 14px;">&#9679; &#9679; &#9679;</span>
-                            </div>
-                        </div>
-                        <iframe id="oc-editor-rotar" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true" style="width: 100%; height: 400px; border: none; display: block;"></iframe>
-                    </div>
-                </section>
-            </section>
 
             <!-- Ejercicio 1: Combinar Listas -->
             <section>
@@ -362,7 +324,7 @@ void mergeListas(int arr1[], int tam1, int arr2[], int tam2, int arr3[], int & t
                     
                     <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; border-left: 6px solid var(--utn-gold); text-align: left;">
                         <h4 style="color: var(--utn-blue); font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-lightbulb"></i> Estrategia eficiente O(N):</h4>
-                        <p style="font-size: 16px; margin: 0;">En lugar de desplazar los elementos hacia adelante repetidamente (lo cual sería O(N²)), primero contamos los múltiplos. Luego, recorremos el arreglo **de atrás hacia adelante** colocando cada elemento directamente en su ubicación final en un solo paso.</p>
+                        <p style="font-size: 16px; margin: 0;">En lugar de desplazar los elementos hacia adelante repetidamente (lo cual sería O(N²)), primero contamos los múltiplos. Luego, recorremos el arreglo <strong>de atrás hacia adelante</strong> colocando cada elemento directamente en su ubicación final en un solo paso.</p>
                     </div>
                 </section>
 
@@ -416,7 +378,7 @@ int insertarMultiplos100(int arreglo[], int &tamLogico, int tamMaximo) {
             <section>
                 <section>
                     <h2 class="slide-title">Ejercicio 3: Eliminar Repetidos</h2>
-                    <p style="font-size: 22px; margin-bottom: 25px;">Recibir una lista de enteros positivos. Eliminar los valores repetidos del vector (dejando solo la primera aparición), y retornar la cantidad de números **pares** eliminados y el promedio de los elementos que quedaron.</p>
+                    <p style="font-size: 22px; margin-bottom: 25px;">Recibir una lista de enteros positivos. Eliminar los valores repetidos del vector (dejando solo la primera aparición), y retornar la cantidad de números <strong>pares</strong> eliminados y el promedio de los elementos que quedaron.</p>
                     
                     <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; border-left: 6px solid var(--utn-gold); text-align: left;">
                         <h4 style="color: var(--utn-blue); font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-scissors"></i> Lógica del Algoritmo:</h4>
@@ -477,12 +439,12 @@ void eliminarRepetidos(int V[], int &n, int &paresEliminados, double &promedioRe
             <section>
                 <section>
                     <h2 class="slide-title">Ejercicio 4: Impares entre Pares</h2>
-                    <p style="font-size: 20px; margin-bottom: 25px;">Recibir una lista **ordenada** de enteros positivos. Eliminar todos los valores **impares** que se encuentren directamente en medio de dos valores **pares**. Retornar la cantidad de impares eliminados y la **mayor diferencia** entre dos elementos pares sucesivos que queden en el vector.</p>
+                    <p style="font-size: 20px; margin-bottom: 25px;">Recibir una lista <strong>ordenada</strong> de enteros positivos. Eliminar todos los valores <strong>impares</strong> que se encuentren directamente en medio de dos valores <strong>pares</strong>. Retornar la cantidad de impares eliminados y la <strong>mayor diferencia</strong> entre dos elementos pares sucesivos que queden en el vector.</p>
                     
                     <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; border-left: 6px solid var(--utn-gold); text-align: left; margin-bottom: 10px;">
                         <h4 style="color: var(--utn-blue); font-size: 18px; margin-bottom: 8px;"><i class="fa-solid fa-circle-question"></i> Ejemplo:</h4>
                         <p style="font-size: 16px; margin: 0; font-family: monospace;">
-                            Original: [2, **5**, 8, 9, 12, **15**, 20, 22]<br>
+                            Original: [2, <strong>5</strong>, 8, 9, 12, <strong>15</strong>, 20, 22]<br>
                             El 5 está entre 2 y 8 (pares). Se elimina.<br>
                             El 15 está entre 12 y 20 (pares). Se elimina.<br>
                             Resultado: [2, 8, 9, 12, 20, 22]. Pares sucesivos restantes: (2,8), (8,12), (12,20), (20,22).<br>
@@ -619,10 +581,17 @@ void eliminarImparesEntrePares(int V[], int &n, int &imparesEliminados, int &max
 using namespace std;
 
 int buscaElemento(int arreglo[], int tam, int elemento) {
-    for (int i = 0; i < tam; i++) {
-        if (arreglo[i] == elemento) return i;
+    int pos = -1;
+    bool encontrado = false;
+    int i = 0;
+    while (i < tam && !encontrado) {
+        if (arreglo[i] == elemento) {
+            pos = i;
+            encontrado = true;
+        }
+        i++;
     }
-    return -1;
+    return pos;
 }
 
 int main() {
@@ -675,41 +644,6 @@ int main() {
     return 0;
 }`;
 
-        // 3. Código C++ Ejercicio 14 (Rotar Izquierda)
-        const cppCodeRotar = `#include <iostream>
-using namespace std;
-
-void rotar_izquierda(int arreglo[], int tam) {
-    if (tam > 0) {
-        int elementoCero = arreglo[0];
-        for (int i = 0; i < tam - 1; i++) {
-            arreglo[i] = arreglo[i + 1];
-        }
-        arreglo[tam - 1] = elementoCero;
-    } else {
-        cout << "No se puede rotar un arreglo de tamano 0" << endl;
-    }
-}
-
-void imprimir(int arreglo[], int tam) {
-    cout << "[";
-    for (int i = 0; i < tam; i++) {
-        cout << arreglo[i] << (i < tam - 1 ? ", " : "");
-    }
-    cout << "]" << endl;
-}
-
-int main() {
-    int v[4] = {1, 2, 3, 4};
-    cout << "Original: ";
-    imprimir(v, 4);
-    
-    rotar_izquierda(v, 4);
-    cout << "Rotado: ";
-    imprimir(v, 4);
-    
-    return 0;
-}`;
 
         // 4. Código C++ Ejercicio 1 (Combinar Listas)
         const cppCodeCombina = `#include <iostream>
@@ -777,25 +711,26 @@ int insertarMultiplos100(int arreglo[], int &tamLogico, int tamMaximo) {
         }
     }
     
+    int resultado = 0;
     if (tamLogico + insertados > tamMaximo) {
         cout << "Error: El espacio fisico no es suficiente." << endl;
-        return 0;
-    }
-    
-    int orig = tamLogico - 1;
-    int dest = tamLogico + insertados - 1;
-    tamLogico += insertados;
-    
-    while (orig >= 0) {
-        if (arreglo[orig] != 0 && arreglo[orig] % 100 == 0) {
-            arreglo[dest--] = arreglo[orig] + 1;
-            arreglo[dest--] = arreglo[orig];
-        } else {
-            arreglo[dest--] = arreglo[orig];
+    } else {
+        int orig = tamLogico - 1;
+        int dest = tamLogico + insertados - 1;
+        tamLogico += insertados;
+        
+        while (orig >= 0) {
+            if (arreglo[orig] != 0 && arreglo[orig] % 100 == 0) {
+                arreglo[dest--] = arreglo[orig] + 1;
+                arreglo[dest--] = arreglo[orig];
+            } else {
+                arreglo[dest--] = arreglo[orig];
+            }
+            orig--;
         }
-        orig--;
+        resultado = insertados;
     }
-    return insertados;
+    return resultado;
 }
 
 void imprimir(int arreglo[], int tam) {
@@ -977,8 +912,7 @@ int main() {
                 sendCodeWithRetries('oc-editor-lineal', cppCodeLineal);
             } else if (slide.id === 'slide-compiler-binaria') {
                 sendCodeWithRetries('oc-editor-binaria', cppCodeBinaria);
-            } else if (slide.id === 'slide-compiler-rotar') {
-                sendCodeWithRetries('oc-editor-rotar', cppCodeRotar);
+
             } else if (slide.id === 'slide-compiler-combina') {
                 sendCodeWithRetries('oc-editor-combina', cppCodeCombina);
             } else if (slide.id === 'slide-compiler-insertar') {
