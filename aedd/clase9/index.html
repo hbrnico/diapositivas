@@ -53,8 +53,14 @@
             font-family: 'Fira Code', monospace; font-size: 18px; margin: 0;
             border-left: 6px solid var(--utn-gold); box-shadow: 0 15px 40px rgba(0,0,0,0.25);
             width: 100%;
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
         }
-        .reveal code { font-family: 'Fira Code', monospace; }
+        .reveal code { 
+            font-family: 'Fira Code', monospace; 
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
+        }
 
         .section-title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .section-title-layout h2 { font-size: 100px !important; color: var(--utn-gold) !important; font-weight: 700 !important; letter-spacing: -2px; }
@@ -270,31 +276,39 @@ int busquedaBinaria(int arreglo[], int tam, int elemento) {
                     
                     <div class="two-column" style="margin-top: 30px; gap: 30px;">
                         <div style="background: var(--bg-neutral); padding: 25px; border-radius: 16px; text-align: left;">
-                            <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;"><i class="fa-solid fa-link"></i> Opción A: Concatenación</h3>
-                            <p style="font-size: 16px; margin: 0; line-height: 1.4;">Copia los elementos de la primera lista y a continuación los de la segunda. El resultado no preserva el orden global.</p>
+                            <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;"><i class="fa-solid fa-link"></i> Opción A: Concatenar y Ordenar</h3>
+                            <p style="font-size: 16px; margin: 0; line-height: 1.4;">Copia los elementos de ambas listas en una nueva y luego la ordena (ej: con Selección). Es la opción más intuitiva si aún no se vio el algoritmo de mezcla (Merge).</p>
                         </div>
                         <div style="background: var(--bg-neutral); padding: 25px; border-radius: 16px; text-align: left;">
-                            <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;"><i class="fa-solid fa-code-merge"></i> Opción B: Merge Combinado</h3>
-                            <p style="font-size: 16px; margin: 0; line-height: 1.4;">Compara las cabezas de ambas listas y va insertando el menor en la tercera. Preserva el orden en tiempo óptimo O(N+M).</p>
+                            <h3 style="color: var(--utn-blue); font-size: 22px; margin-bottom: 10px;"><i class="fa-solid fa-code-merge"></i> Opción B: Mezcla Combinada (Merge)</h3>
+                            <p style="font-size: 16px; margin: 0; line-height: 1.4;">Recorre ambas listas simultáneamente insertando siempre el menor. Es la solución óptima O(N+M) pero requiere conocer el algoritmo de mezcla.</p>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    <h2 class="slide-title">Solución: Ejercicio 1 (Merge Ordenado)</h2>
-                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|2|3|4-10|11-12">
-void mergeListas(int arr1[], int tam1, int arr2[], int tam2, int arr3[], int & tam3) {
-    int i = 0, j = 0;
+                    <h2 class="slide-title">Solución: Ejercicio 1 (Concatenar y Ordenar)</h2>
+                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|3-6|8-11|13-21">
+void combinaListas(int arr1[], int tam1, int arr2[], int tam2, int arr3[], int &tam3) {
+    // 1. Concatenar ambas listas
     tam3 = 0;
-    while (i < tam1 && j < tam2) {
-        if (arr1[i] < arr2[j]) {
-            arr3[tam3++] = arr1[i++];
-        } else {
-            arr3[tam3++] = arr2[j++];
-        }
+    for (int i = 0; i < tam1; i++) {
+        arr3[tam3++] = arr1[i];
     }
-    while (i < tam1) arr3[tam3++] = arr1[i++]; // Copiar remanentes
-    while (j < tam2) arr3[tam3++] = arr2[j++];
+    for (int i = 0; i < tam2; i++) {
+        arr3[tam3++] = arr2[i];
+    }
+
+    // 2. Ordenar la lista resultante (Método Selección)
+    for (int i = 0; i < tam3; i++) {
+        int min = i;
+        for (int k = i + 1; k < tam3; k++) {
+            if (arr3[k] < arr3[min]) min = k;
+        }
+        int aux = arr3[i];
+        arr3[i] = arr3[min];
+        arr3[min] = aux;
+    }
 }
                     </code></pre>
                 </section>
@@ -413,7 +427,9 @@ void eliminarRepetidos(int V[], int &n, int &paresEliminados, double &promedioRe
         }
     }
     double suma = 0;
-    for (int j = 0; j < n; j++) suma += V[j];
+    for (int j = 0; j < n; j++) {
+        suma += V[j];
+    }
     if (n > 0) {
         promedioRestantes = suma / n;
     } else {
@@ -470,7 +486,9 @@ void eliminarImparesEntrePares(int V[], int &n, int &imparesEliminados, int &max
     while (i < n - 1) {
         if (V[i] % 2 != 0 && V[i-1] % 2 == 0 && V[i+1] % 2 == 0) {
             imparesEliminados++;
-            for (int k = i; k < n - 1; k++) V[k] = V[k+1];
+            for (int k = i; k < n - 1; k++) {
+                V[k] = V[k+1];
+            }
             n--;
         } else {
             i++;
@@ -655,13 +673,25 @@ int main() {
         const cppCodeCombina = `#include <iostream>
 using namespace std;
 
-void combinaListas(int arreglo1[], int tam1, int arreglo2[], int tam2, int arreglo3[], int & tam3) {
+void combinaListas(int arr1[], int tam1, int arr2[], int tam2, int arr3[], int &tam3) {
+    // 1. Concatenar
     tam3 = 0;
     for (int i = 0; i < tam1; i++) {
-        arreglo3[tam3++] = arreglo1[i];
+        arr3[tam3++] = arr1[i];
     }
     for (int i = 0; i < tam2; i++) {
-        arreglo3[tam3++] = arreglo2[i];
+        arr3[tam3++] = arr2[i];
+    }
+
+    // 2. Ordenar (Selección)
+    for (int i = 0; i < tam3; i++) {
+        int min = i;
+        for (int k = i + 1; k < tam3; k++) {
+            if (arr3[k] < arr3[min]) min = k;
+        }
+        int aux = arr3[i];
+        arr3[i] = arr3[min];
+        arr3[min] = aux;
     }
 }
 
