@@ -264,40 +264,116 @@ void merge(int v[], int inicio1, int final1, int inicio2, int final2) {
 
             <!-- Ejercicio 2 -->
             <section>
-                <h2 class="slide-title">Ejercicio 2: Eliminar y Ordenar</h2>
-                <div class="content-area">
-                    <p style="font-size: 24px; margin-bottom: 20px;">Diseñar la función <code>elimOrdenar</code> que recibe un arreglo desordenado <code>A</code> de 500 números enteros, su tamaño lógico <code>TLA</code> y un entero <code>X</code>. La función debe:</p>
-                    <div class="tiled-content" style="margin-top: 20px;">
-                        <div class="tile">
-                            <h3>1. Eliminar múltiplos</h3>
-                            <p style="font-size: 18px;">Eliminar todos los valores del vector A que sean múltiplos de X.</p>
-                        </div>
-                        <div class="tile">
-                            <h3>2. Ordenar</h3>
-                            <p style="font-size: 18px;">Dejar el vector ordenado ascendentemente.</p>
-                        </div>
-                        <div class="tile">
-                            <h3>3. Retornar cantidad</h3>
-                            <p style="font-size: 18px;">Retornar cuántos elementos fueron eliminados del vector A.</p>
+                <!-- Enunciado -->
+                <section>
+                    <h2 class="slide-title">Ejercicio 2: Eliminar y Ordenar</h2>
+                    <div class="content-area">
+                        <p style="font-size: 24px; margin-bottom: 20px;">Diseñar la función <code>elimOrdenar</code> que recibe un arreglo desordenado <code>A</code> de 500 números enteros, su tamaño lógico <code>TLA</code> y un entero <code>X</code>. La función debe:</p>
+                        <div class="tiled-content" style="margin-top: 20px;">
+                            <div class="tile">
+                                <h3>1. Eliminar múltiplos</h3>
+                                <p style="font-size: 18px;">Eliminar todos los valores del vector A que sean múltiplos de X.</p>
+                            </div>
+                            <div class="tile">
+                                <h3>2. Ordenar</h3>
+                                <p style="font-size: 18px;">Dejar el vector ordenado ascendentemente.</p>
+                            </div>
+                            <div class="tile">
+                                <h3>3. Retornar cantidad</h3>
+                                <p style="font-size: 18px;">Retornar cuántos elementos fueron eliminados del vector A.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
+                <!-- Solución (Abajo 👇) -->
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 2</h2>
+                    <pre><code class="cpp" data-trim data-noescape data-line-numbers="1|5-16|18-25|27">
+int elimOrdenar(int A[], int &TLA, int X) {
+    int eliminados = 0;
+    
+    // 1. Eliminar múltiplos de X (desplazando a la izquierda)
+    int i = 0;
+    while (i < TLA) {
+        if (A[i] % X == 0) {
+            for (int j = i; j < TLA - 1; j++) {
+                A[j] = A[j + 1];
+            }
+            TLA--;
+            eliminados++;
+        } else {
+            i++;
+        }
+    }
+    
+    // 2. Ordenar ascendentemente (Método Selección)
+    for (i = 0; i < TLA; i++) {
+        int min = i;
+        for (int j = i + 1; j < TLA; j++) {
+            if (A[j] < A[min]) min = j;
+        }
+        intercambio(A[i], A[min]);
+    }
+    
+    return eliminados;
+}
+                    </code></pre>
+                </section>
             </section>
 
             <!-- Ejercicio 3 -->
             <section>
-                <h2 class="slide-title">Ejercicio 3: Intersección</h2>
-                <div class="content-area">
-                    <p style="font-size: 24px; margin-bottom: 25px;">La función <code>Uno()</code> recibe dos arreglos desordenados (<code>A</code> y <code>B</code>, con TB &le; TA), sus tamaños lógicos (<code>TA</code> y <code>TB</code>) y un booleano <code>C</code>. La función debe:</p>
-                    <div style="background: var(--bg-neutral); padding: 30px; border-radius: 20px; border-left: 10px solid var(--utn-blue);">
-                        <p style="font-size: 20px; margin: 0 0 10px 0; font-weight: bold; color: var(--utn-blue);">¿Qué debe retornar?</p>
-                        <ul style="font-size: 20px; margin: 0; padding-left: 20px;">
-                            <li>Un nuevo vector <code>V</code> y su tamaño lógico <code>TV</code>.</li>
-                            <li>Debe contener <strong>solamente los valores de B que están en A, sin repeticiones</strong>.</li>
-                            <li>El vector <code>V</code> debe quedar ordenado <strong>ascendentemente si C == true</strong> (descendentemente en caso contrario).</li>
-                        </ul>
+                <!-- Enunciado -->
+                <section>
+                    <h2 class="slide-title">Ejercicio 3: Intersección</h2>
+                    <div class="content-area">
+                        <p style="font-size: 24px; margin-bottom: 25px;">La función <code>Uno()</code> recibe dos arreglos desordenados (<code>A</code> y <code>B</code>, con TB &le; TA), sus tamaños lógicos (<code>TA</code> y <code>TB</code>) y un booleano <code>C</code>. La función debe:</p>
+                        <div style="background: var(--bg-neutral); padding: 30px; border-radius: 20px; border-left: 10px solid var(--utn-blue);">
+                            <p style="font-size: 20px; margin: 0 0 10px 0; font-weight: bold; color: var(--utn-blue);">¿Qué debe retornar?</p>
+                            <ul style="font-size: 20px; margin: 0; padding-left: 20px;">
+                                <li>Un nuevo vector <code>V</code> y su tamaño lógico <code>TV</code>.</li>
+                                <li>Debe contener <strong>solamente los valores de B que están en A, sin repeticiones</strong>.</li>
+                                <li>El vector <code>V</code> debe quedar ordenado <strong>ascendentemente si C == true</strong> (descendentemente en caso contrario).</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                </section>
+                <!-- Solución (Abajo 👇) -->
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 3</h2>
+                    <pre style="max-height: 500px; overflow-y: auto;"><code class="cpp" data-trim data-noescape data-line-numbers="1-6|8-20|22-34">
+bool existe(int vec[], int tl, int valor) {
+    for (int i = 0; i < tl; i++)
+        if (vec[i] == valor) return true;
+    return false;
+}
+
+void Uno(int A[], int TA, int B[], int TB, bool C, int V[], int &TV) {
+    TV = 0;
+    
+    // 1. Filtrar elementos de B que están en A sin repeticiones
+    for (int i = 0; i < TB; i++) {
+        if (existe(A, TA, B[i]) && !existe(V, TV, B[i])) {
+            V[TV] = B[i];
+            TV++;
+        }
+    }
+    
+    // 2. Ordenar según C (Selección)
+    for (int i = 0; i < TV; i++) {
+        int target = i;
+        for (int j = i + 1; j < TV; j++) {
+            if (C) {
+                if (V[j] < V[target]) target = j; // Ascendente
+            } else {
+                if (V[j] > V[target]) target = j; // Descendente
+            }
+        }
+        intercambio(V[i], V[target]);
+    }
+}
+                    </code></pre>
+                </section>
             </section>
 
 
