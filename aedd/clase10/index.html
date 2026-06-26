@@ -114,12 +114,12 @@
                 <h2 class="slide-title">Selección Directa</h2>
                 <div class="two-column">
                     <div>
-                        <p>Busca el elemento **mínimo** de la lista y lo intercambia con el primero. Luego busca el siguiente mínimo en el resto y lo intercambia con el segundo, y así sucesivamente.</p>
+                        <p>Busca el elemento <strong>mínimo</strong> de la lista y lo intercambia con el primero. Luego busca el siguiente mínimo en el resto y lo intercambia con el segundo, y así sucesivamente.</p>
                         <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; margin-top: 25px; border-left: 6px solid var(--utn-gold);">
                             <p style="font-weight: bold; margin-bottom: 5px; color: var(--utn-blue);">Características:</p>
                             <ul style="font-size: 18px; margin: 0; padding-left: 20px;">
                                 <li>Fácil de implementar.</li>
-                                <li>Complejidad temporal: \(O(n^2)\).</li>
+                                <li>Complejidad temporal: O(n²).</li>
                                 <li>Realiza pocos intercambios físicos de elementos.</li>
                             </ul>
                         </div>
@@ -143,13 +143,13 @@ void seleccion(int vec[], const int tl) {
                 <h2 class="slide-title">Inserción Directa</h2>
                 <div class="two-column">
                     <div>
-                        <p>Ordena insertando cada elemento en su **posición correcta** respecto a los elementos que ya han sido ordenados previamente (similar a cómo se ordenan cartas en la mano).</p>
+                        <p>Ordena insertando cada elemento en su <strong>posición correcta</strong> respecto a los elementos que ya han sido ordenados previamente (similar a cómo se ordenan cartas en la mano).</p>
                         <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; margin-top: 25px; border-left: 6px solid var(--utn-gold);">
                             <p style="font-weight: bold; margin-bottom: 5px; color: var(--utn-blue);">Características:</p>
                             <ul style="font-size: 18px; margin: 0; padding-left: 20px;">
                                 <li>Eficiente para listas pequeñas o semiordenadas.</li>
-                                <li>Complejidad temporal: \(O(n^2)\) en peor caso, \(O(n)\) en el mejor.</li>
-                                <li>Algoritmo de ordenamiento **estable**.</li>
+                                <li>Complejidad temporal: O(n²) en peor caso, O(n) en el mejor.</li>
+                                <li>Algoritmo de ordenamiento <strong>estable</strong>.</li>
                             </ul>
                         </div>
                     </div>
@@ -173,12 +173,12 @@ void insercion(int vec[], const int tl) {
                 <h2 class="slide-title">Ordenamiento Burbuja</h2>
                 <div class="two-column">
                     <div>
-                        <p>Compara elementos adyacentes y los intercambia si están en el orden incorrecto. El elemento más grande **"flota"** hacia el final en cada pasada.</p>
+                        <p>Compara elementos adyacentes y los intercambia si están en el orden incorrecto. El elemento más grande <strong>"flota"</strong> hacia el final en cada pasada.</p>
                         <div style="background: var(--bg-neutral); padding: 25px; border-radius: 12px; margin-top: 25px; border-left: 6px solid var(--utn-gold);">
                             <p style="font-weight: bold; margin-bottom: 5px; color: var(--utn-blue);">Características:</p>
                             <ul style="font-size: 18px; margin: 0; padding-left: 20px;">
                                 <li>Conceptualmente el más simple.</li>
-                                <li>Complejidad temporal: \(O(n^2)\).</li>
+                                <li>Complejidad temporal: O(n²).</li>
                                 <li>Realiza una gran cantidad de escrituras en memoria debido a los múltiples intercambios.</li>
                             </ul>
                         </div>
@@ -198,9 +198,9 @@ void burbuja(int vec[], const int tl) {
 
             <!-- Slide 5: Merge Sort Meme (Marge Sort) -->
             <section>
-                <h2 class="slide-title">Marge Sort (Meme)</h2>
+                <h2 class="slide-title">Marge Sort</h2>
                 <div class="content-area">
-                    <img src="margeSort.png" alt="Marge Sort Meme" style="max-height: 500px; width: auto; object-fit: contain; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+                    <img src="margeSort.png" alt="Marge Sort" style="max-height: 650px; width: auto; object-fit: contain; margin: 0 auto; display: block; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
                 </div>
             </section>
 
@@ -209,11 +209,11 @@ void burbuja(int vec[], const int tl) {
                 <h2 class="slide-title">Merge Sort: Divide y Vencerás</h2>
                 <div class="two-column" style="align-items: flex-start;">
                     <div>
-                        <p style="font-size: 20px;">Divide recursivamente el arreglo en mitades iguales hasta tener arreglos de tamaño 1. Luego, **mezcla** ordenadamente las mitades adyacentes.</p>
+                        <p style="font-size: 20px;">Divide recursivamente el arreglo en mitades iguales hasta tener arreglos de tamaño 1. Luego, <strong>mezcla</strong> ordenadamente las mitades adyacentes.</p>
                         <div style="background: var(--bg-neutral); padding: 20px; border-radius: 12px; margin-top: 20px; border-left: 6px solid var(--utn-gold);">
                             <p style="font-weight: bold; margin-bottom: 5px; font-size: 18px; color: var(--utn-blue);">Características:</p>
                             <ul style="font-size: 16px; margin: 0; padding-left: 20px;">
-                                <li>Complejidad temporal garantizada: \(O(n \log n)\).</li>
+                                <li>Complejidad temporal garantizada: O(n log n).</li>
                                 <li>Usa memoria auxiliar temporal durante la mezcla.</li>
                                 <li>Altamente eficiente para arreglos grandes.</li>
                             </ul>
@@ -282,13 +282,13 @@ void merge(int v[], int inicio1, int final1, int inicio2, int final2) {
             <section>
                 <h2 class="slide-title">Ejercicio 3: Intersección</h2>
                 <div class="content-area">
-                    <p style="font-size: 24px; margin-bottom: 25px;">La función <code>Uno()</code> recibe dos arreglos desordenados (<code>A</code> y <code>B</code>, con \(TB \le TA\)), sus tamaños lógicos (<code>TA</code> y <code>TB</code>) y un booleano <code>C</code>. La función debe:</p>
+                    <p style="font-size: 24px; margin-bottom: 25px;">La función <code>Uno()</code> recibe dos arreglos desordenados (<code>A</code> y <code>B</code>, con TB &le; TA), sus tamaños lógicos (<code>TA</code> y <code>TB</code>) y un booleano <code>C</code>. La función debe:</p>
                     <div style="background: var(--bg-neutral); padding: 30px; border-radius: 20px; border-left: 10px solid var(--utn-blue);">
                         <p style="font-size: 20px; margin: 0 0 10px 0; font-weight: bold; color: var(--utn-blue);">¿Qué debe retornar?</p>
                         <ul style="font-size: 20px; margin: 0; padding-left: 20px;">
                             <li>Un nuevo vector <code>V</code> y su tamaño lógico <code>TV</code>.</li>
-                            <li>Debe contener **solamente los valores de B que están en A, sin repeticiones**.</li>
-                            <li>El vector <code>V</code> debe quedar ordenado **ascendentemente si C == true** (descendentemente en caso contrario).</li>
+                            <li>Debe contener <strong>solamente los valores de B que están en A, sin repeticiones</strong>.</li>
+                            <li>El vector <code>V</code> debe quedar ordenado <strong>ascendentemente si C == true</strong> (descendentemente en caso contrario).</li>
                         </ul>
                     </div>
                 </div>
@@ -310,9 +310,9 @@ void merge(int v[], int inicio1, int final1, int inicio2, int final2) {
                     <div class="tile">
                         <h3>Reglas de Identificación</h3>
                         <ul style="font-size: 18px; margin: 0; padding-left: 20px;">
-                            <li>Tener exactamente **8 caracteres**.</li>
-                            <li>Comenzar obligatoriamente con una **letra**.</li>
-                            <li>Los restantes caracteres deben ser **letras o números** (alfanuméricos).</li>
+                            <li>Tener exactamente <strong>8 caracteres</strong>.</li>
+                            <li>Comenzar obligatoriamente con una <strong>letra</strong>.</li>
+                            <li>Los restantes caracteres deben ser <strong>letras o números</strong> (alfanuméricos).</li>
                         </ul>
                     </div>
                     <div style="background: white; padding: 25px; border-radius: 16px; border: 1px solid #E2E8F0; text-align: left; height: 100%; display: flex; flex-direction: column; justify-content: center;">
@@ -475,11 +475,11 @@ string armaMail(string nombreApellido) {
             <section>
                 <h2 class="slide-title">Strings: Ejercicio 7 (Anagramas)</h2>
                 <div class="content-area">
-                    <p style="font-size: 24px; margin-bottom: 20px;">Una palabra \(\alpha\) es un **anagrama** de \(\beta\) si es posible obtener \(\alpha\) cambiando el orden de las letras de \(\beta\). Diseñar una función que compruebe si dos palabras son anagramas (case-insensitive).</p>
+                    <p style="font-size: 24px; margin-bottom: 20px;">Una palabra <strong>&alpha;</strong> es un <strong>anagrama</strong> de <strong>&beta;</strong> si es posible obtener <strong>&alpha;</strong> cambiando el orden de las letras de <strong>&beta;</strong>. Diseñar una función que compruebe si dos palabras son anagramas (case-insensitive).</p>
                     <div class="two-column">
                         <div class="tile">
                             <h3>Estrategia Eficiente</h3>
-                            <p style="font-size: 18px; margin: 0;">Usamos **arreglos de frecuencia** (tamaño 256) para contar cuántas veces aparece cada carácter en ambos strings, y luego comparamos las frecuencias en el rango 'a'-'z'.</p>
+                            <p style="font-size: 18px; margin: 0;">Usamos <strong>arreglos de frecuencia</strong> (tamaño 256) para contar cuántas veces aparece cada carácter en ambos strings, y luego comparamos las frecuencias en el rango 'a'-'z'.</p>
                         </div>
                         <div style="background: white; padding: 25px; border-radius: 16px; border: 1px solid #E2E8F0; text-align: left;">
                             <h4 style="color: #64748B; font-size: 16px; margin-bottom: 15px; font-weight: bold;">EJEMPLOS</h4>
@@ -536,13 +536,13 @@ bool sonAnagramas(string primerString, string segundoString) {
             <section>
                 <h2 class="slide-title">Strings: Ejercicio 13 (Recursivo)</h2>
                 <div class="content-area">
-                    <p style="font-size: 24px; margin-bottom: 20px;">Desarrollar una función **recursiva** llamada <code>invString_recursivo</code> que reciba un string y su tamaño lógico, y devuelva la cadena invertida.</p>
+                    <p style="font-size: 24px; margin-bottom: 20px;">Desarrollar una función <strong>recursiva</strong> llamada <code>invString_recursivo</code> que reciba un string y su tamaño lógico, y devuelva la cadena invertida.</p>
                     <div class="two-column" style="gap: 30px;">
                         <div class="tile">
                             <h3>Lógica Recursiva</h3>
                             <ul style="font-size: 18px; margin: 0; padding-left: 20px;">
-                                <li>**Caso base:** Si el tamaño es 0, retorna una cadena vacía <code>""</code>.</li>
-                                <li>**Caso recursivo:** Retorna el último caracter más la inversión recursiva del resto de la cadena (tamaño - 1).</li>
+                                <li><strong>Caso base:</strong> Si el tamaño es 0, retorna una cadena vacía <code>""</code>.</li>
+                                <li><strong>Caso recursivo:</strong> Retorna el último caracter más la inversión recursiva del resto de la cadena (tamaño - 1).</li>
                             </ul>
                         </div>
                         <div style="background: white; padding: 25px; border-radius: 16px; border: 1px solid #E2E8F0; text-align: left; height: 100%; display: flex; flex-direction: column; justify-content: center;">
