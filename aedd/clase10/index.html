@@ -227,8 +227,7 @@ void burbuja(int vec[], const int tl) {
                     </div>
                     <pre style="max-height: 500px; overflow-y: auto;"><code class="cpp" data-trim data-noescape data-line-numbers="1-8|10-25|27-33|35-37">
 void mergesort(int v[], int inicio, int final) {
-    if (final - inicio == 0) return;
-    else {
+    if (final - inicio != 0) {
         mergesort(v, inicio, (inicio + final) / 2);
         mergesort(v, (inicio + final) / 2 + 1, final);
         merge(v, inicio, (inicio + final) / 2, (inicio + final) / 2 + 1, final);
@@ -343,9 +342,16 @@ int elimOrdenar(int A[], int &TLA, int X) {
                     <h2 class="slide-title">Solución: Ejercicio 3</h2>
                     <pre style="max-height: 500px; overflow-y: auto;"><code class="cpp" data-trim data-noescape data-line-numbers="1-6|8-20|22-34">
 bool existe(int vec[], int tl, int valor) {
-    for (int i = 0; i < tl; i++)
-        if (vec[i] == valor) return true;
-    return false;
+    bool encontrado = false;
+    int i = 0;
+    while (i < tl && !encontrado) {
+        if (vec[i] == valor) {
+            encontrado = true;
+        } else {
+            i++;
+        }
+    }
+    return encontrado;
 }
 
 void Uno(int A[], int TA, int B[], int TB, bool C, int V[], int &TV) {
