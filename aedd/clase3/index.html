@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AEDD - Clase 3</title>
+
+    <!-- Usando CDNs para asegurar carga independiente del root local -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --utn-blue: #002B5B;
+            --utn-gold: #FFC107;
+            --bg-neutral: #F8FAFC;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+        }
+
+        .reveal { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: 'Poppins', sans-serif; text-transform: none; margin: 0; }
+        .reveal p, .reveal li { font-size: 22px; color: var(--text-main); line-height: 1.5; text-align: left; }
+        
+        .slide-title {
+            font-size: 48px !important; font-weight: 700 !important; color: var(--utn-blue) !important;
+            margin-bottom: 40px !important; border-left: 12px solid var(--utn-gold);
+            padding-left: 24px; text-transform: uppercase !important; letter-spacing: -1.5px;
+            text-align: left; width: 100%;
+        }
+
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: center; }
+
+        .tiled-content { display: flex; gap: 30px; width: 100%; justify-content: center; }
+        .tile { 
+            flex: 1; background: var(--bg-neutral); padding: 40px; border-radius: 24px;
+            border-bottom: 6px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+        }
+        .tile:hover { transform: translateY(-10px); border-bottom-color: var(--utn-gold); background: #FFF; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .tile h3 { font-size: 24px; color: var(--utn-blue); margin-bottom: 15px; }
+
+        .reveal pre {
+            background: #272822; padding: 20px; border-radius: 12px;
+            font-family: 'Fira Code', monospace; font-size: 18px; margin: 0;
+            border-left: 6px solid var(--utn-gold); box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            width: 100%;
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
+        }
+        .reveal code { 
+            font-family: 'Fira Code', monospace; 
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
+        }
+
+        .section-title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .section-title-layout h2 { font-size: 100px !important; color: var(--utn-gold) !important; font-weight: 700 !important; letter-spacing: -2px; }
+        .section-title-layout p { color: rgba(255,255,255,0.7) !important; font-size: 32px !important; font-weight: 300 !important; letter-spacing: 5px; text-align: center; }
+
+        .branding-footer { position: absolute; bottom: 30px; left: 40px; color: #94A3B8; font-weight: 600; font-size: 14px; letter-spacing: 1px; z-index: 1000; }
+        .branding-footer span { color: var(--utn-gold); }
+
+        /* Componentes Específicos */
+        .compiler-window {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .compiler-window .header {
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .compiler-window .header button {
+            background: var(--utn-blue);
+            color: white;
+            border: 1px solid var(--utn-gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .compiler-window iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        .problem-statement {
+            background: var(--bg-neutral);
+            border-left: 5px solid var(--utn-blue);
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- Estilos Especiales para Celulares Verticales --- */
+        @media (max-aspect-ratio: 1/1) {
+            .two-column { grid-template-columns: 1fr; gap: 30px; }
+            .tiled-content { flex-direction: column; gap: 20px; }
+            .slide-title { font-size: 60px !important; margin-bottom: 25px !important; }
+            .reveal p, .reveal li { font-size: 28px; }
+            .reveal pre { font-size: 20px; padding: 25px; overflow-x: auto; width: 100%; box-sizing: border-box; }
+            .section-title-layout h2 { font-size: 100px !important; }
+            .section-title-layout p { font-size: 28px !important; }
+            .tile { padding: 25px; }
+            .tile h3 { font-size: 24px; }
+            .branding-footer { bottom: 20px; left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Portada -->
+            <section data-background-gradient="radial-gradient(circle at 50% 50%, #272822 0%, #111111 100%)">
+                <h1 style="color: white; font-size: 80px; line-height: 0.9; margin-bottom: 20px;">Algoritmos y Estructuras de Datos<br><span style="color: var(--utn-gold); font-weight: 300; font-size: 60px;">Clase 3: Estructuras Condicionales</span></h1>
+                <p style="color: rgba(255,255,255,0.6); margin-top: 50px; text-align: center; font-size: 24px;">Docentes de práctica: Tomás Assenza, Exequiel Benavidez, Facundo Sanchez, Nicolás Huber</p>
+                <p style="color: rgba(255,255,255,0.3); margin-top: 10px; text-align: center; font-size: 18px; letter-spacing: 2px;">UTN - Facultad Regional Santa Fe</p>
+            </section>
+
+            <!-- Ejercicio 10 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 10 - Concatenación</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;"><strong>Objetivo:</strong> Extraer prefijos y sufijos de longitud determinada y combinarlos.</p>
+                        <p><strong>Especificaciones:</strong></p>
+                        <ul>
+                            <li>Solicite el ingreso de una frase.</li>
+                            <li>Extraiga los primeros 5 caracteres y los últimos 5 caracteres.</li>
+                            <li>Muestre por separado ambos segmentos y luego su concatenación.</li>
+                        </ul>
+                        <p style="margin-bottom: 0;"><em>Restricción:</em> Asuma que la cadena ingresada posee al menos 5 caracteres.</p>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 10</h2>
+                    <div style="width:100%">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="6-8|10-11|13-15">
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string frase;
+    cout &lt;&lt; "Entrada: ";
+    cin &gt;&gt; frase;
+
+    string primeros = frase.substr(0, 5);
+    string ultimos  = frase.substr(frase.length() - 5, 5);
+
+    cout &lt;&lt; "Primeros 5: " &lt;&lt; primeros &lt;&lt; endl;
+    cout &lt;&lt; "Últimos 5: "  &lt;&lt; ultimos  &lt;&lt; endl;
+    cout &lt;&lt; "Concatenación: " &lt;&lt; primeros + ultimos &lt;&lt; endl;
+
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-1">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-1', ej10Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-1" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio 4 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 4 - Guía 4</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;">Un postulante a un empleo realiza un test de capacitación. Se ingresa por teclado la cantidad total de preguntas realizadas y la cantidad de preguntas contestadas correctamente.</p>
+                        <p>Desarrollar un programa que informe el nivel obtenido, sabiendo que:</p>
+                        <ul style="margin-bottom: 0;">
+                            <li><strong>Nivel máximo:</strong> Porcentaje &gt;= 90.</li>
+                            <li><strong>Nivel medio:</strong> Porcentaje &gt;= 75% y &lt; 90%.</li>
+                            <li><strong>Nivel regular:</strong> Porcentaje &gt;= 50% y &lt; 75%.</li>
+                            <li><strong>Fuera de nivel:</strong> Porcentaje &lt; 50%.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 4</h2>
+                    <div style="width:100%">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="4-8|10|12-19">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int total, correctas;
+    cout &lt;&lt; "Total de preguntas: ";
+    cin &gt;&gt; total;
+    cout &lt;&lt; "Respuestas correctas: ";
+    cin &gt;&gt; correctas;
+
+    float porcentaje = (correctas * 100.0) / total;
+
+    if (porcentaje &gt;= 90)
+        cout &lt;&lt; "Nivel máximo" &lt;&lt; endl;
+    else if (porcentaje &gt;= 75)
+        cout &lt;&lt; "Nivel medio" &lt;&lt; endl;
+    else if (porcentaje &gt;= 50)
+        cout &lt;&lt; "Nivel regular" &lt;&lt; endl;
+    else
+        cout &lt;&lt; "Fuera de nivel" &lt;&lt; endl;
+
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-2">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-2', ej4Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-2" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio 7 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 7 - Guía 4</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;">Diseñe un algoritmo que lea un número de tres cifras y determine si es o no capicúa. Un número es capicúa si “se lee igual al derecho y al revés”.</p>
+                        <p><strong>Ejemplo:</strong></p>
+                        <ul style="margin-bottom: 0;">
+                            <li>Si se ingresa <strong>383</strong>, indica que es capicúa.</li>
+                            <li>Si se ingresa <strong>473</strong>, indica que no es capicúa.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 7</h2>
+                    <div style="width:100%">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="6-7|9-10|12-15">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int num;
+    cout &lt;&lt; "Ingrese un número de tres cifras: ";
+    cin &gt;&gt; num;
+
+    int centena = num / 100;
+    int unidad  = num % 10;
+
+    if (centena == unidad)
+        cout &lt;&lt; num &lt;&lt; " es capicúa" &lt;&lt; endl;
+    else
+        cout &lt;&lt; num &lt;&lt; " no es capicúa" &lt;&lt; endl;
+
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-3">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-3', ej7Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-3" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio 6 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 6 - Guía 4</h2>
+                    <div class="problem-statement" style="padding-top: 10px; padding-bottom: 10px;">
+                        <p style="margin-top: 0; font-size: 20px;">El cliente de un supermercado puede pagar con:</p>
+                        <ul style="font-size: 20px;">
+                            <li>Tarjeta de débito ('d', 'D')</li>
+                            <li>Billetera Santa Fe ('b', 'B')</li>
+                            <li>Tarjeta de crédito ('c', 'C') en 1 o 3 cuotas.</li>
+                        </ul>
+                        <p style="font-size: 20px;"><strong>Condiciones:</strong></p>
+                        <ul style="margin-bottom: 0; font-size: 20px;">
+                            <li><strong>Crédito:</strong> En 1 cuota no hay recargo. En 3 cuotas hay un 10% de recargo.</li>
+                            <li><strong>Débito:</strong> Si supera $3000, hay un 15% de descuento. Si no, ningún cambio.</li>
+                            <li><strong>Billetera SF:</strong> Siempre 30% de descuento.</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 6</h2>
+                    <div style="width:100%;">
+                        <pre style="font-size: 15px;"><code class="cpp" data-trim data-noescape data-line-numbers="6-7|9-18|19-25|26-29">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    float monto, total;
+    char pago;
+    cout &lt;&lt; "Monto: "; cin &gt;&gt; monto;
+    cout &lt;&lt; "Pago (C/D/B): "; cin &gt;&gt; pago;
+
+    if (pago == 'c' || pago == 'C') {
+        int cuotas;
+        cout &lt;&lt; "Cuotas (1 o 3): "; cin &gt;&gt; cuotas;
+        if (cuotas == 3) {
+            total = monto * 1.10;
+            cout &lt;&lt; "Por cuota: $" &lt;&lt; total / 3 &lt;&lt; endl;
+        } else {
+            total = monto;
+        }
+    } else if (pago == 'd' || pago == 'D') {
+        if (monto &gt; 3000) {
+            total = monto * 0.85;
+        } else {
+            total = monto;
+        }
+    } else if (pago == 'b' || pago == 'B') {
+        total = monto * 0.70;
+    }
+    cout &lt;&lt; "Total: $" &lt;&lt; total &lt;&lt; endl;
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-4">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-4', ej6Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-4" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scripts de Reveal.js usando CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    
+    <script>
+        let revealPlugins = [];
+        if (typeof RevealHighlight !== 'undefined') {
+            revealPlugins.push(RevealHighlight);
+        }
+        
+        Reveal.initialize({
+            hash: true,
+            plugins: revealPlugins,
+            slideNumber: true,
+            margin: 0.1,
+            transition: 'slide'
+        });
+
+        // Configuración de OneCompiler
+        const ej10Code = `#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string frase;\n    cout << "Entrada: ";\n    cin >> frase;\n\n    string primeros = frase.substr(0, 5);\n    string ultimos  = frase.substr(frase.length() - 5, 5);\n\n    cout << "Primeros 5: " << primeros << endl;\n    cout << "Últimos 5: "  << ultimos  << endl;\n    cout << "Concatenación: " << primeros + ultimos << endl;\n\n    return 0;\n}`;
+        const ej4Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int total, correctas;\n    cout << "Total de preguntas: ";\n    cin >> total;\n    cout << "Respuestas correctas: ";\n    cin >> correctas;\n\n    float porcentaje = (correctas * 100.0) / total;\n\n    if (porcentaje >= 90)\n        cout << "Nivel máximo" << endl;\n    else if (porcentaje >= 75)\n        cout << "Nivel medio" << endl;\n    else if (porcentaje >= 50)\n        cout << "Nivel regular" << endl;\n    else\n        cout << "Fuera de nivel" << endl;\n\n    return 0;\n}`;
+        const ej7Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int num;\n    cout << "Ingrese un número de tres cifras: ";\n    cin >> num;\n\n    int centena = num / 100;\n    int unidad  = num % 10;\n\n    if (centena == unidad)\n        cout << num << " es capicúa" << endl;\n    else\n        cout << num << " no es capicúa" << endl;\n\n    return 0;\n}`;
+        const ej6Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    float monto, total;\n    char pago;\n    cout << "Monto: ";\n    cin >> monto;\n    cout << "Pago (C, D, B): ";\n    cin >> pago;\n\n    if (pago == 'c' || pago == 'C') {\n        int cuotas;\n        cout << "Cuotas (1 o 3): ";\n        cin >> cuotas;\n        if (cuotas == 3) {\n            total = monto * 1.10;\n            cout << "Por cuota: $" << total / 3 << endl;\n        } else {\n            total = monto;\n        }\n    } else if (pago == 'd' || pago == 'D') {\n        if (monto > 3000) {\n            total = monto * 0.85;\n        } else {\n            total = monto;\n        }\n    } else if (pago == 'b' || pago == 'B') {\n        total = monto * 0.70;\n    }\n    cout << "Total: $" << total << endl;\n    return 0;\n}`;
+
+        function sendCode(iframeId, code) {
+            const iframe = document.getElementById(iframeId);
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({
+                    eventType: 'populateCode',
+                    language: 'cpp',
+                    files: [{ name: 'main.cpp', content: code }]
+                }, '*');
+            }
+        }
+
+        function sendCodeWithRetries(iframeId, code) {
+            const send = () => sendCode(iframeId, code);
+            send();
+            setTimeout(send, 200);
+            setTimeout(send, 500);
+            setTimeout(send, 1000);
+            setTimeout(send, 2000);
+            setTimeout(send, 3500);
+        }
+
+        // Lógica para detectar el cambio de diapositiva y enviar el código correspondiente
+        Reveal.on('slidechanged', event => {
+            if (event.currentSlide.id === 'slide-compiler-1') sendCodeWithRetries('oc-editor-1', ej10Code);
+            else if (event.currentSlide.id === 'slide-compiler-2') sendCodeWithRetries('oc-editor-2', ej4Code);
+            else if (event.currentSlide.id === 'slide-compiler-3') sendCodeWithRetries('oc-editor-3', ej7Code);
+            else if (event.currentSlide.id === 'slide-compiler-4') sendCodeWithRetries('oc-editor-4', ej6Code);
+        });
+
+        // Aplanado Dinámico para Móviles
+        const isMobileOrTablet = window.innerWidth < 768;
+        if (isMobileOrTablet) {
+            document.querySelectorAll('[id^="slide-compiler-"]').forEach(el => el.remove());
+            
+            document.querySelectorAll('section > section').forEach(sec => {
+                const parent = sec.parentNode;
+                if (parent && parent.children.length === 1) {
+                    while (sec.firstChild) {
+                        parent.appendChild(sec.firstChild);
+                    }
+                    sec.remove();
+                }
+            });
+        }
+    </script>
+</body>
+</html>

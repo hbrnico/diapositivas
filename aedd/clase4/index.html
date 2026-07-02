@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>AEDD - Clase 4</title>
+
+    <!-- Usando CDNs para asegurar carga independiente del root local -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css" id="theme" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/monokai.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --utn-blue: #002B5B;
+            --utn-gold: #FFC107;
+            --bg-neutral: #F8FAFC;
+            --text-main: #1E293B;
+            --text-light: #64748B;
+        }
+
+        .reveal { font-family: 'Inter', sans-serif; background-color: #FFFFFF; }
+        .reveal h1, .reveal h2, .reveal h3 { font-family: 'Poppins', sans-serif; text-transform: none; margin: 0; }
+        .reveal p, .reveal li { font-size: 22px; color: var(--text-main); line-height: 1.5; text-align: left; }
+        
+        .slide-title {
+            font-size: 48px !important; font-weight: 700 !important; color: var(--utn-blue) !important;
+            margin-bottom: 40px !important; border-left: 12px solid var(--utn-gold);
+            padding-left: 24px; text-transform: uppercase !important; letter-spacing: -1.5px;
+            text-align: left; width: 100%;
+        }
+
+        .content-area { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; width: 100%; }
+        
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: center; }
+
+        .tiled-content { display: flex; gap: 30px; width: 100%; justify-content: center; }
+        .tile { 
+            flex: 1; background: var(--bg-neutral); padding: 40px; border-radius: 24px;
+            border-bottom: 6px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+        }
+        .tile:hover { transform: translateY(-10px); border-bottom-color: var(--utn-gold); background: #FFF; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .tile h3 { font-size: 24px; color: var(--utn-blue); margin-bottom: 15px; }
+
+        .reveal pre {
+            background: #272822; padding: 20px; border-radius: 12px;
+            font-family: 'Fira Code', monospace; font-size: 18px; margin: 0;
+            border-left: 6px solid var(--utn-gold); box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            width: 100%;
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
+        }
+        .reveal code { 
+            font-family: 'Fira Code', monospace; 
+            font-variant-ligatures: none;
+            font-feature-settings: "liga" 0, "calt" 0;
+        }
+
+        .section-title-layout { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .section-title-layout h2 { font-size: 100px !important; color: var(--utn-gold) !important; font-weight: 700 !important; letter-spacing: -2px; }
+        .section-title-layout p { color: rgba(255,255,255,0.7) !important; font-size: 32px !important; font-weight: 300 !important; letter-spacing: 5px; text-align: center; }
+
+        .branding-footer { position: absolute; bottom: 30px; left: 40px; color: #94A3B8; font-weight: 600; font-size: 14px; letter-spacing: 1px; z-index: 1000; }
+        .branding-footer span { color: var(--utn-gold); }
+
+        /* Componentes Específicos */
+        .compiler-window {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .compiler-window .header {
+            background: #333;
+            color: white;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .compiler-window .header button {
+            background: var(--utn-blue);
+            color: white;
+            border: 1px solid var(--utn-gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        .compiler-window iframe {
+            flex: 1;
+            width: 100%;
+            border: none;
+        }
+
+        .problem-statement {
+            background: var(--bg-neutral);
+            border-left: 5px solid var(--utn-blue);
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- Estilos Especiales para Celulares Verticales --- */
+        @media (max-aspect-ratio: 1/1) {
+            .two-column { grid-template-columns: 1fr; gap: 30px; }
+            .tiled-content { flex-direction: column; gap: 20px; }
+            .slide-title { font-size: 60px !important; margin-bottom: 25px !important; }
+            .reveal p, .reveal li { font-size: 28px; }
+            .reveal pre { font-size: 20px; padding: 25px; overflow-x: auto; width: 100%; box-sizing: border-box; }
+            .section-title-layout h2 { font-size: 100px !important; }
+            .section-title-layout p { font-size: 28px !important; }
+            .tile { padding: 25px; }
+            .tile h3 { font-size: 24px; }
+            .branding-footer { bottom: 20px; left: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- Portada -->
+            <section data-background-gradient="radial-gradient(circle at 50% 50%, #272822 0%, #111111 100%)">
+                <h1 style="color: white; font-size: 80px; line-height: 0.9; margin-bottom: 20px;">Algoritmos y Estructuras de Datos<br><span style="color: var(--utn-gold); font-weight: 300; font-size: 60px;">Clase 4: Estructuras Condicionales</span></h1>
+                <p style="color: rgba(255,255,255,0.6); margin-top: 50px; text-align: center; font-size: 24px;">Docentes de práctica: Tomás Assenza, Exequiel Benavidez, Facundo Sanchez, Nicolás Huber</p>
+                <p style="color: rgba(255,255,255,0.3); margin-top: 10px; text-align: center; font-size: 18px; letter-spacing: 2px;">UTN - Facultad Regional Santa Fe</p>
+            </section>
+
+            <!-- Ejercicio 5 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 5 - Guía 4</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;"><strong>Descripción:</strong> Se solicita escribir el código para ingresar desde el teclado un número de día de la semana (1-7) y un número de mes (1-12), y que imprima el nombre del día de la semana y el del mes correspondientes.</p>
+                        <p>Si el día o el mes ingresado es incorrecto deberá mostrarse un mensaje de error.</p>
+                        <br>
+                        <p><strong>Ejemplo:</strong></p>
+                        <ul style="margin-bottom: 0;">
+                            <li>Ingresando <code>3, 8</code> &rarr; <strong>Martes y Agosto</strong></li>
+                            <li>Ingresando <code>12, 7</code> &rarr; <strong>Día inexistente.</strong></li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 5</h2>
+                    <div style="width:100%;">
+                        <pre style="font-size: 14px;"><code class="cpp" data-trim data-noescape data-line-numbers="6-9|11-13|15-23|25-38">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int dia, mes;
+    
+    cout &lt;&lt; "Dia de la semana (1-7): "; cin &gt;&gt; dia;
+    cout &lt;&lt; "Mes (1-12): "; cin &gt;&gt; mes;
+    
+    if (dia &gt; 7 || dia &lt; 1 || mes &gt; 12 || mes &lt; 1) {
+        cout &lt;&lt; "Dia inexistente" &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "Dia: ";
+        switch(dia) {
+            case 1: cout &lt;&lt; "Lunes"; break;
+            case 2: cout &lt;&lt; "Martes"; break;
+            case 3: cout &lt;&lt; "Miercoles"; break;
+            case 4: cout &lt;&lt; "Jueves"; break;
+            case 5: cout &lt;&lt; "Viernes"; break;
+            case 6: cout &lt;&lt; "Sabado"; break;
+            case 7: cout &lt;&lt; "Domingo"; break;
+        }
+        
+        switch(mes) {
+            case 1: cout &lt;&lt; " y Enero\n"; break;
+            case 2: cout &lt;&lt; " y Febrero\n"; break;
+            case 3: cout &lt;&lt; " y Marzo\n"; break;
+            case 4: cout &lt;&lt; " y Abril\n"; break;
+            case 5: cout &lt;&lt; " y Mayo\n"; break;
+            case 6: cout &lt;&lt; " y Junio\n"; break;
+            case 7: cout &lt;&lt; " y Julio\n"; break;
+            case 8: cout &lt;&lt; " y Agosto\n"; break;
+            case 9: cout &lt;&lt; " y Septiembre\n"; break;
+            case 10: cout &lt;&lt; " y Octubre\n"; break;
+            case 11: cout &lt;&lt; " y Noviembre\n"; break;
+            case 12: cout &lt;&lt; " y Diciembre\n"; break;
+        }
+    }
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-1">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-1', ej5Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-1" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio 9 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 9 - Guía 4</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;">Escribir un programa que dado un número del 0 al 9, escriba en pantalla los números restantes hasta el 10.</p>
+                        <br>
+                        <p><strong>Ejemplo:</strong></p>
+                        <ul style="margin-bottom: 0;">
+                            <li>Ingrese un número: <strong>7</strong></li>
+                            <li><strong>8 9 10</strong></li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 9</h2>
+                    <div style="width:100%;">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="5-7|9-21">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int numero;
+    cout &lt;&lt; "Ingrese un numero (0-9): ";
+    cin &gt;&gt; numero;
+    
+    switch (numero) {
+        case 0: cout &lt;&lt; "1\t";
+        case 1: cout &lt;&lt; "2\t";
+        case 2: cout &lt;&lt; "3\t";
+        case 3: cout &lt;&lt; "4\t";
+        case 4: cout &lt;&lt; "5\t";
+        case 5: cout &lt;&lt; "6\t";
+        case 6: cout &lt;&lt; "7\t";
+        case 7: cout &lt;&lt; "8\t";
+        case 8: cout &lt;&lt; "9\t";
+        case 9: cout &lt;&lt; "10" &lt;&lt; endl; break;
+        default: cout &lt;&lt; "Fuera del rango" &lt;&lt; endl;
+    }
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-2">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-2', ej9Code)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-2" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio 10 -->
+            <section>
+                <section>
+                    <h2 class="slide-title">Ejercicio 10 - Guía 4</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;">Realizar un programa que permita calcular el perímetro de un triángulo. El programa mostrará un menú con las opciones Equilátero, Isósceles y Escaleno.</p>
+                        <p>Si la opción es incorrecta, muestra un error. Si es correcta, solicitará los datos necesarios (deben ser positivos) y calculará el perímetro.</p>
+                        <p><strong>Menú:</strong></p>
+                        <ol style="margin-bottom: 0;">
+                            <li>Equilatero</li>
+                            <li>Isósceles</li>
+                            <li>Escaleno</li>
+                        </ol>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución: Ejercicio 10</h2>
+                    <div style="width:100%;">
+                        <pre style="font-size: 13px;"><code class="cpp" data-trim data-noescape data-line-numbers="5-9|11-13|15-38|40-42">
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int tipo;
+    float l1, l2, l3, p = 0;
+
+    cout &lt;&lt; "1- Equilatero\n2- Isoceles\n3- Escaleno\nTipo: ";
+    cin &gt;&gt; tipo;
+
+    if (tipo &lt; 1 || tipo &gt; 3) {
+        cout &lt;&lt; "Opcion invalida." &lt;&lt; endl;
+    } else {
+        switch (tipo) {
+            case 1:
+                cout &lt;&lt; "Lado: "; cin &gt;&gt; l1;
+                if (l1 &lt;= 0) cout &lt;&lt; "El valor debe ser positivo." &lt;&lt; endl;
+                else p = l1 * 3;
+                break;
+            case 2:
+                cout &lt;&lt; "Lado repetido: "; cin &gt;&gt; l1;
+                cout &lt;&lt; "Lado distinto: "; cin &gt;&gt; l2;
+                if (l1 &lt;= 0 || l2 &lt;= 0) cout &lt;&lt; "Debe ser positivo." &lt;&lt; endl;
+                else p = l1 * 2 + l2;
+                break;
+            case 3:
+                cout &lt;&lt; "Lado 1: "; cin &gt;&gt; l1;
+                cout &lt;&lt; "Lado 2: "; cin &gt;&gt; l2;
+                cout &lt;&lt; "Lado 3: "; cin &gt;&gt; l3;
+                if (l1 &lt;= 0 || l2 &lt;= 0 || l3 &lt;= 0) cout &lt;&lt; "Positivos." &lt;&lt; endl;
+                else p = l1 + l2 + l3;
+                break;
+        }
+        
+        if (p &gt; 0) cout &lt;&lt; "Perimetro: " &lt;&lt; p &lt;&lt; endl;
+    }
+    return 0;
+}
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-compiler-3">
+                    <h2 class="slide-title">Ejecución Interactiva</h2>
+                    <div class="compiler-window">
+                        <div class="header">
+                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
+                            <button onclick="sendCodeWithRetries('oc-editor-3', ej10Code2)">Restaurar Código</button>
+                        </div>
+                        <iframe id="oc-editor-3" src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scripts de Reveal.js usando CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+    
+    <script>
+        let revealPlugins = [];
+        if (typeof RevealHighlight !== 'undefined') {
+            revealPlugins.push(RevealHighlight);
+        }
+        
+        Reveal.initialize({
+            hash: true,
+            plugins: revealPlugins,
+            slideNumber: true,
+            margin: 0.1,
+            transition: 'slide'
+        });
+
+        // Configuración de OneCompiler
+        const ej5Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int dia, mes;\n    \n    cout << "Dia de la semana (1-7): "; cin >> dia;\n    cout << "Mes (1-12): "; cin >> mes;\n    \n    if (dia > 7 || dia < 1 || mes > 12 || mes < 1) {\n        cout << "Dia inexistente" << endl;\n    } else {\n        cout << "Dia: ";\n        switch(dia) {\n            case 1: cout << "Lunes"; break;\n            case 2: cout << "Martes"; break;\n            case 3: cout << "Miercoles"; break;\n            case 4: cout << "Jueves"; break;\n            case 5: cout << "Viernes"; break;\n            case 6: cout << "Sabado"; break;\n            case 7: cout << "Domingo"; break;\n        }\n        \n        switch(mes) {\n            case 1: cout << " y Enero\\n"; break;\n            case 2: cout << " y Febrero\\n"; break;\n            case 3: cout << " y Marzo\\n"; break;\n            case 4: cout << " y Abril\\n"; break;\n            case 5: cout << " y Mayo\\n"; break;\n            case 6: cout << " y Junio\\n"; break;\n            case 7: cout << " y Julio\\n"; break;\n            case 8: cout << " y Agosto\\n"; break;\n            case 9: cout << " y Septiembre\\n"; break;\n            case 10: cout << " y Octubre\\n"; break;\n            case 11: cout << " y Noviembre\\n"; break;\n            case 12: cout << " y Diciembre\\n"; break;\n        }\n    }\n    return 0;\n}`;
+        const ej9Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int numero;\n    cout << "Ingrese un numero (entre 0 y 9): ";\n    cin >> numero;\n    \n    switch (numero) {\n        case 0: cout << "1\\t";\n        case 1: cout << "2\\t";\n        case 2: cout << "3\\t";\n        case 3: cout << "4\\t";\n        case 4: cout << "5\\t";\n        case 5: cout << "6\\t";\n        case 6: cout << "7\\t";\n        case 7: cout << "8\\t";\n        case 8: cout << "9\\t";\n        case 9: cout << "10" << endl; break;\n        default: cout << "Fuera del rango" << endl;\n    }\n    return 0;\n}`;
+        const ej10Code2 = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int tipo;\n    float l1, l2, l3, p = 0;\n\n    cout << "1- Equilatero\\n2- Isoceles\\n3- Escaleno\\nTipo: ";\n    cin >> tipo;\n\n    if (tipo < 1 || tipo > 3) {\n        cout << "Opcion invalida." << endl;\n    } else {\n        switch (tipo) {\n            case 1:\n                cout << "Lado: "; cin >> l1;\n                if (l1 <= 0) cout << "El valor debe ser positivo." << endl;\n                else p = l1 * 3;\n                break;\n            case 2:\n                cout << "Lado repetido: "; cin >> l1;\n                cout << "Lado distinto: "; cin >> l2;\n                if (l1 <= 0 || l2 <= 0) cout << "Debe ser positivo." << endl;\n                else p = l1 * 2 + l2;\n                break;\n            case 3:\n                cout << "Lado 1: "; cin >> l1;\n                cout << "Lado 2: "; cin >> l2;\n                cout << "Lado 3: "; cin >> l3;\n                if (l1 <= 0 || l2 <= 0 || l3 <= 0) cout << "Positivos." << endl;\n                else p = l1 + l2 + l3;\n                break;\n        }\n        \n        if (p > 0) cout << "Perimetro: " << p << endl;\n    }\n    return 0;\n}`;
+
+        function sendCode(iframeId, code) {
+            const iframe = document.getElementById(iframeId);
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage({
+                    eventType: 'populateCode',
+                    language: 'cpp',
+                    files: [{ name: 'main.cpp', content: code }]
+                }, '*');
+            }
+        }
+
+        function sendCodeWithRetries(iframeId, code) {
+            const send = () => sendCode(iframeId, code);
+            send();
+            setTimeout(send, 200);
+            setTimeout(send, 500);
+            setTimeout(send, 1000);
+            setTimeout(send, 2000);
+            setTimeout(send, 3500);
+        }
+
+        Reveal.on('slidechanged', event => {
+            if (event.currentSlide.id === 'slide-compiler-1') sendCodeWithRetries('oc-editor-1', ej5Code);
+            else if (event.currentSlide.id === 'slide-compiler-2') sendCodeWithRetries('oc-editor-2', ej9Code);
+            else if (event.currentSlide.id === 'slide-compiler-3') sendCodeWithRetries('oc-editor-3', ej10Code2);
+        });
+
+        // Aplanado Dinámico para Móviles
+        const isMobileOrTablet = window.innerWidth < 768;
+        if (isMobileOrTablet) {
+            document.querySelectorAll('[id^="slide-compiler-"]').forEach(el => el.remove());
+            
+            document.querySelectorAll('section > section').forEach(sec => {
+                const parent = sec.parentNode;
+                if (parent && parent.children.length === 1) {
+                    while (sec.firstChild) {
+                        parent.appendChild(sec.firstChild);
+                    }
+                    sec.remove();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
