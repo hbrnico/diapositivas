@@ -21,7 +21,8 @@
     <style>
         :root {
             --utn-blue: #002B5B;
-            --utn-gold: #86efac; /* Verde clarito */
+            --utn-gold: #86efac;
+            /* Verde clarito */
             --bg-neutral: #F8FAFC;
             --text-main: #1E293B;
             --text-light: #64748B;
@@ -286,104 +287,84 @@
                     UTN - Facultad Regional Santa Fe</p>
             </section>
 
-            <!-- Ejercicio 10 (De Clase 3) -->
+
+            <!-- 11340 Omega -->
             <section>
                 <section>
-                    <h2 class="slide-title">Ejercicio 10 - Concatenación</h2>
+                    <h2 class="slide-title">11340 - Etapas de la vida</h2>
                     <div class="problem-statement">
-                        <p style="margin-top: 0;"><strong>Objetivo:</strong> Extraer prefijos y sufijos de longitud
-                            determinada y combinarlos.</p>
-                        <p><strong>Especificaciones:</strong></p>
-                        <ul>
-                            <li>Solicite el ingreso de una frase.</li>
-                            <li>Extraiga los primeros 5 caracteres y los últimos 5 caracteres.</li>
-                            <li>Muestre por separado ambos segmentos y luego su concatenación.</li>
-                        </ul>
-                        <p style="margin-bottom: 0;"><em>Restricción:</em> Asuma que la cadena ingresada posee al menos
-                            5 caracteres.</p>
-                    </div>
-                </section>
-                <section>
-                    <h2 class="slide-title">Solución: Ejercicio 10</h2>
-                    <div style="width:100%">
-                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="6-8|10-11|13-15">
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-using namespace std;
+                        <p style="margin-top: 0;">Dieguito vio en su clase de biología las etapas de la vida, pero aún
+                            no las distingue muy bien. Tu tarea es ayudar a Dieguito haciendo un programa el cual, dado
+                            un número de entrada <em>L</em>, el cual representa una edad, te diga si dicha edad
+                            corresponde a un <strong>bebé, niño, joven, adulto o adulto de la tercera edad</strong>.
+                            Para lograr lo anterior, considera la siguiente clasificación:</p>
 
-int main() {
-    string frase;
-    cout &lt;&lt; "Entrada: ";
-    cin &gt;&gt; frase;
-
-    string primeros = frase.substr(0, 5);
-    string ultimos  = frase.substr(frase.length() - 5, 5);
-
-    cout &lt;&lt; "Primeros 5: " &lt;&lt; primeros &lt;&lt; endl;
-    cout &lt;&lt; "Últimos 5: "  &lt;&lt; ultimos  &lt;&lt; endl;
-    cout &lt;&lt; "Concatenación: " &lt;&lt; primeros + ultimos &lt;&lt; endl;
-
-    return 0;
-}
-                        </code></pre>
-                    </div>
-                </section>
-                <section id="slide-compiler-1">
-                    <h2 class="slide-title">Ejecución Interactiva</h2>
-                    <div class="compiler-window">
-                        <div class="header">
-                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
-                            <button onclick="sendCodeWithRetries('oc-editor-1', ej10Code)">Restaurar Código</button>
-                        </div>
-                        <iframe id="oc-editor-1"
-                            src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
-                    </div>
-                </section>
-            </section>
-
-            <!-- Ejercicio 4 (De Clase 3) -->
-            <section>
-                <section>
-                    <h2 class="slide-title">Ejercicio 4 - Guía 4</h2>
-                    <div class="problem-statement">
-                        <p style="margin-top: 0;">Un postulante a un empleo realiza un test de capacitación. Se ingresa
-                            por teclado la cantidad total de preguntas realizadas y la cantidad de preguntas contestadas
-                            correctamente.</p>
-                        <p>Desarrollar un programa que informe el nivel obtenido, sabiendo que:</p>
+                        <p>
                         <ul style="margin-bottom: 0;">
-                            <li><strong>Nivel máximo:</strong> Porcentaje &gt;= 90.</li>
-                            <li><strong>Nivel medio:</strong> Porcentaje &gt;= 75% y &lt; 90%.</li>
-                            <li><strong>Nivel regular:</strong> Porcentaje &gt;= 50% y &lt; 75%.</li>
-                            <li><strong>Fuera de nivel:</strong> Porcentaje &lt; 50%.</li>
+                            <li><strong>Bebé:</strong> De 0 a 3 años, inclusive.</li>
+                            <li><strong>Niño:</strong> De 4 a 14 años, inclusive.</li>
+                            <li><strong>Joven:</strong> De 15 a 18 años, inclusive.</li>
+                            <li><strong>Adulto:</strong> de 19 a 65 años, inclusive.</li>
+                            <li><strong>Adulto de la tercera edad:</strong> de 65 años en adelante (máximo 99 años).
+                            </li>
                         </ul>
+
+                        </p>
+                        <p><strong>Ejemplo de entrada/salida:</strong></p>
+                        <table
+                            style="font-size: 0.8em; margin: 0 auto; margin-top: 10px; width: 60%; text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Entrada</th>
+                                    <th style="text-align: center;">Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>17</td>
+                                    <td>JOVEN</td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td>ADULTO</td>
+                                </tr>
+                                <tr>
+                                    <td>68</td>
+                                    <td>ADULTO 3RA</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>BEBE</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
                 <section>
-                    <h2 class="slide-title">Solución: Ejercicio 4</h2>
+                    <h2 class="slide-title">Solución: Etapas de la vida</h2>
                     <div style="width:100%">
-                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="4-8|10|12-19">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="7-8|9-11|12-14|15-17|18-20">
 #include &lt;iostream&gt;
 using namespace std;
 
-int main() {
-    int total, correctas;
-    cout &lt;&lt; "Total de preguntas: ";
-    cin &gt;&gt; total;
-    cout &lt;&lt; "Respuestas correctas: ";
-    cin &gt;&gt; correctas;
-
-    float porcentaje = (correctas * 100.0) / total;
-
-    if (porcentaje &gt;= 90)
-        cout &lt;&lt; "Nivel máximo" &lt;&lt; endl;
-    else if (porcentaje &gt;= 75)
-        cout &lt;&lt; "Nivel medio" &lt;&lt; endl;
-    else if (porcentaje &gt;= 50)
-        cout &lt;&lt; "Nivel regular" &lt;&lt; endl;
-    else
-        cout &lt;&lt; "Fuera de nivel" &lt;&lt; endl;
-
-    return 0;
+int main(int argc, char *argv[]) {
+	int edad;
+	cin&gt;&gt;edad;
+	if (edad&lt;=3)
+		cout&lt;&lt;"BEBE"&lt;&lt;endl;
+	else
+		if (edad&gt;=4 && edad&lt;=14)
+			cout&lt;&lt;"NINO"&lt;&lt;endl;
+		else
+			if (edad&gt;=15 && edad&lt;=18)
+				cout&lt;&lt;"JOVEN"&lt;&lt;endl;
+			else
+				if (edad&gt;=19 && edad&lt;=65)
+					cout&lt;&lt;"ADULTO"&lt;&lt;endl;
+				else
+					if (edad&gt;65)
+						cout&lt;&lt;"ADULTO 3RA"&lt;&lt;endl;
+	return 0;
 }
                         </code></pre>
                     </div>
@@ -396,129 +377,6 @@ int main() {
                             <button onclick="sendCodeWithRetries('oc-editor-2', ej4Code)">Restaurar Código</button>
                         </div>
                         <iframe id="oc-editor-2"
-                            src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
-                    </div>
-                </section>
-            </section>
-
-            <!-- Ejercicio 7 (De Clase 3) -->
-            <section>
-                <section>
-                    <h2 class="slide-title">Ejercicio 7 - Guía 4</h2>
-                    <div class="problem-statement">
-                        <p style="margin-top: 0;">Diseñe un algoritmo que lea un número de tres cifras y determine si es
-                            o no capicúa. Un número es capicúa si “se lee igual al derecho y al revés”.</p>
-                        <p><strong>Ejemplo:</strong></p>
-                        <ul style="margin-bottom: 0;">
-                            <li>Si se ingresa <strong>383</strong>, indica que es capicúa.</li>
-                            <li>Si se ingresa <strong>473</strong>, indica que no es capicúa.</li>
-                        </ul>
-                    </div>
-                </section>
-                <section>
-                    <h2 class="slide-title">Solución: Ejercicio 7</h2>
-                    <div style="width:100%">
-                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="6-7|9-10|12-15">
-#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-    int num;
-    cout &lt;&lt; "Ingrese un número de tres cifras: ";
-    cin &gt;&gt; num;
-
-    int centena = num / 100;
-    int unidad  = num % 10;
-
-    if (centena == unidad)
-        cout &lt;&lt; num &lt;&lt; " es capicúa" &lt;&lt; endl;
-    else
-        cout &lt;&lt; num &lt;&lt; " no es capicúa" &lt;&lt; endl;
-
-    return 0;
-}
-                        </code></pre>
-                    </div>
-                </section>
-                <section id="slide-compiler-3">
-                    <h2 class="slide-title">Ejecución Interactiva</h2>
-                    <div class="compiler-window">
-                        <div class="header">
-                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
-                            <button onclick="sendCodeWithRetries('oc-editor-3', ej7Code)">Restaurar Código</button>
-                        </div>
-                        <iframe id="oc-editor-3"
-                            src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
-                    </div>
-                </section>
-            </section>
-
-            <!-- Ejercicio 6 (De Clase 3) -->
-            <section>
-                <section>
-                    <h2 class="slide-title">Ejercicio 6 - Guía 4</h2>
-                    <div class="problem-statement" style="padding-top: 10px; padding-bottom: 10px;">
-                        <p style="margin-top: 0; font-size: 20px;">El cliente de un supermercado puede pagar con:</p>
-                        <ul style="font-size: 20px;">
-                            <li>Tarjeta de débito ('d', 'D')</li>
-                            <li>Billetera Santa Fe ('b', 'B')</li>
-                            <li>Tarjeta de crédito ('c', 'C') en 1 o 3 cuotas.</li>
-                        </ul>
-                        <p style="font-size: 20px;"><strong>Condiciones:</strong></p>
-                        <ul style="margin-bottom: 0; font-size: 20px;">
-                            <li><strong>Crédito:</strong> En 1 cuota no hay recargo. En 3 cuotas hay un 10% de recargo.
-                            </li>
-                            <li><strong>Débito:</strong> Si supera $3000, hay un 15% de descuento. Si no, ningún cambio.
-                            </li>
-                            <li><strong>Billetera SF:</strong> Siempre 30% de descuento.</li>
-                        </ul>
-                    </div>
-                </section>
-                <section>
-                    <h2 class="slide-title">Solución: Ejercicio 6</h2>
-                    <div style="width:100%;">
-                        <pre style="font-size: 15px;"><code class="cpp" data-trim data-noescape data-line-numbers="6-7|9-18|19-25|26-29">
-#include &lt;iostream&gt;
-using namespace std;
-
-int main() {
-    float monto, total;
-    char pago;
-    cout &lt;&lt; "Monto: "; cin &gt;&gt; monto;
-    cout &lt;&lt; "Pago (C/D/B): "; cin &gt;&gt; pago;
-
-    if (pago == 'c' || pago == 'C') {
-        int cuotas;
-        cout &lt;&lt; "Cuotas (1 o 3): "; cin &gt;&gt; cuotas;
-        if (cuotas == 3) {
-            total = monto * 1.10;
-            cout &lt;&lt; "Por cuota: $" &lt;&lt; total / 3 &lt;&lt; endl;
-        } else {
-            total = monto;
-        }
-    } else if (pago == 'd' || pago == 'D') {
-        if (monto &gt; 3000) {
-            total = monto * 0.85;
-        } else {
-            total = monto;
-        }
-    } else if (pago == 'b' || pago == 'B') {
-        total = monto * 0.70;
-    }
-    cout &lt;&lt; "Total: $" &lt;&lt; total &lt;&lt; endl;
-    return 0;
-}
-                        </code></pre>
-                    </div>
-                </section>
-                <section id="slide-compiler-4">
-                    <h2 class="slide-title">Ejecución Interactiva</h2>
-                    <div class="compiler-window">
-                        <div class="header">
-                            <span><i class="fa-solid fa-code"></i> Compilador Online</span>
-                            <button onclick="sendCodeWithRetries('oc-editor-4', ej6Code)">Restaurar Código</button>
-                        </div>
-                        <iframe id="oc-editor-4"
                             src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
                     </div>
                 </section>
@@ -601,47 +459,82 @@ int main() {
                 </section>
             </section>
 
-            <!-- Ejercicio 9 (De Clase 4) -->
+            <!-- 3843 - Asteriscos 3 -->
             <section>
                 <section>
-                    <h2 class="slide-title">Ejercicio 9 - Guía 4</h2>
+                    <h2 class="slide-title">3843 - Asteriscos 3</h2>
                     <div class="problem-statement">
-                        <p style="margin-top: 0;">Escribir un programa que dado un número del 0 al 9, escriba en
-                            pantalla los números restantes hasta el 10.</p>
+                        <p style="margin-top: 0;">Realiza un programa que reciba un entero N e imprima una pirámide de
+                            asteriscos de altura N. Vea los ejemplos de entrada y salida.</p>
                         <br>
                         <p><strong>Ejemplo:</strong></p>
-                        <ul style="margin-bottom: 0;">
-                            <li>Ingrese un número: <strong>7</strong></li>
-                            <li><strong>8 9 10</strong></li>
-                        </ul>
+                        <table
+                            style="font-size: 0.8em; margin: 0 auto; margin-top: 10px; width: 60%; text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">Entrada</th>
+                                    <th style="text-align: center;">Salida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align: middle;">7</td>
+                                    <td style="vertical-align: middle;">
+                                        <pre
+                                            style="margin: 0; background: transparent; box-shadow: none; width: auto; display: inline-block; text-align: left;"><code class="plaintext" style="background: transparent;">      *
+     ***
+    *****
+   *******
+  *********
+ ***********
+*************</code></pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="vertical-align: middle;">5</td>
+                                    <td style="vertical-align: middle;">
+                                        <pre
+                                            style="margin: 0; background: transparent; box-shadow: none; width: auto; display: inline-block; text-align: left;"><code class="plaintext" style="background: transparent;">    *
+   ***
+  *****
+ *******
+*********</code></pre>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </section>
                 <section>
-                    <h2 class="slide-title">Solución: Ejercicio 9</h2>
+                    <h2 class="slide-title">Solución: 3843 - Asteriscos 3</h2>
                     <div style="width:100%;">
-                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="5-7|9-21">
+                        <pre><code class="cpp" data-trim data-noescape data-line-numbers="3|7-9|14|16-18|21-24">
 #include &lt;iostream&gt;
 using namespace std;
+void piramide (int);
+int main(int argc, char *argv[]) {
+	int N;
+	cin&gt;&gt;N;
+	if (N&gt;=1 &amp;&amp; N&lt;=100){
+		piramide (N);
+	}
+	return 0;
+}
 
-int main() {
-    int numero;
-    cout &lt;&lt; "Ingrese un numero (0-9): ";
-    cin &gt;&gt; numero;
-    
-    switch (numero) {
-        case 0: cout &lt;&lt; "1\\t";
-        case 1: cout &lt;&lt; "2\\t";
-        case 2: cout &lt;&lt; "3\\t";
-        case 3: cout &lt;&lt; "4\\t";
-        case 4: cout &lt;&lt; "5\\t";
-        case 5: cout &lt;&lt; "6\\t";
-        case 6: cout &lt;&lt; "7\\t";
-        case 7: cout &lt;&lt; "8\\t";
-        case 8: cout &lt;&lt; "9\\t";
-        case 9: cout &lt;&lt; "10" &lt;&lt; endl; break;
-        default: cout &lt;&lt; "Fuera del rango" &lt;&lt; endl;
-    }
-    return 0;
+void piramide(int N){
+	for(int n1=1;n1&lt;=N;n1++){
+		
+		for(int n2=N;n1&lt;n2;n2--){
+			cout&lt;&lt;" ";
+		}
+		
+		int n3=0;
+		do{
+			cout&lt;&lt;'*';
+			n3++;
+		} while(n3!=n1*2-1);
+		cout&lt;&lt;endl;
+	}
 }
                         </code></pre>
                     </div>
@@ -659,64 +552,52 @@ int main() {
                 </section>
             </section>
 
-            <!-- Ejercicio 10 (De Clase 4) -->
+            <!-- Ejercicio 5 (De guia 5) -->
             <section>
                 <section>
-                    <h2 class="slide-title">Ejercicio 10 - Guía 4</h2>
+                    <h2 class="slide-title">Ejercicio 5 - Guía 5</h2>
                     <div class="problem-statement">
-                        <p style="margin-top: 0;">Realizar un programa que permita calcular el perímetro de un
-                            triángulo. El programa mostrará un menú con las opciones Equilátero, Isósceles y Escaleno.
+                        <p style="margin-top: 0;">Estás desarrollando un programa en C++ que te permitirá realizar
+                            varias operaciones con los
+                            números ingresados por el usuario. Tu objetivo es diseñar un programa interactivo que
+                            solicite al
+                            usuario ingresar números y que calcule la suma de los números pares ingresados, la cantidad
+                            de
+                            números impares y la cantidad de números negativos, hasta que se alcance el final del
+                            archivo
+                            (EOF) mediante la combinación de teclas Ctrl + Z en Windows o Ctrl + D en sistemas Unix.
                         </p>
-                        <p>Si la opción es incorrecta, muestra un error. Si es correcta, solicitará los datos necesarios
-                            (deben ser positivos) y calculará el perímetro.</p>
-                        <p><strong>Menú:</strong></p>
-                        <ol style="margin-bottom: 0;">
-                            <li>Equilatero</li>
-                            <li>Isósceles</li>
-                            <li>Escaleno</li>
-                        </ol>
                     </div>
                 </section>
                 <section>
-                    <h2 class="slide-title">Solución: Ejercicio 10</h2>
+                    <h2 class="slide-title">Solución: Ejercicio 5</h2>
                     <div style="width:100%;">
-                        <pre style="font-size: 13px;"><code class="cpp" data-trim data-noescape data-line-numbers="5-9|11-13|15-38|40-42">
+                        <pre style="font-size: 13px;"><code class="cpp" data-trim data-noescape data-line-numbers="5-9|11-12|13-14|15-16|18-19|23-25">
 #include &lt;iostream&gt;
 using namespace std;
 
 int main() {
-    int tipo;
-    float l1, l2, l3, p = 0;
+    int numero;
+    int sumaPares = 0;
+    int cantImpares = 0;
+    int cantNegativos = 0;
 
-    cout &lt;&lt; "1- Equilatero\\n2- Isoceles\\n3- Escaleno\\nTipo: ";
-    cin &gt;&gt; tipo;
-
-    if (tipo &lt; 1 || tipo &gt; 3) {
-        cout &lt;&lt; "Opcion invalida." &lt;&lt; endl;
-    } else {
-        switch (tipo) {
-            case 1:
-                cout &lt;&lt; "Lado: "; cin &gt;&gt; l1;
-                if (l1 &lt;= 0) cout &lt;&lt; "El valor debe ser positivo." &lt;&lt; endl;
-                else p = l1 * 3;
-                break;
-            case 2:
-                cout &lt;&lt; "Lado repetido: "; cin &gt;&gt; l1;
-                cout &lt;&lt; "Lado distinto: "; cin &gt;&gt; l2;
-                if (l1 &lt;= 0 || l2 &lt;= 0) cout &lt;&lt; "Debe ser positivo." &lt;&lt; endl;
-                else p = l1 * 2 + l2;
-                break;
-            case 3:
-                cout &lt;&lt; "Lado 1: "; cin &gt;&gt; l1;
-                cout &lt;&lt; "Lado 2: "; cin &gt;&gt; l2;
-                cout &lt;&lt; "Lado 3: "; cin &gt;&gt; l3;
-                if (l1 &lt;= 0 || l2 &lt;= 0 || l3 &lt;= 0) cout &lt;&lt; "Positivos." &lt;&lt; endl;
-                else p = l1 + l2 + l3;
-                break;
+    cout &lt;&lt; "Ingrese numeros (Ctrl+Z para terminar): " &lt;&lt; endl;
+    while (cin &gt;&gt; numero) {
+        if (numero % 2 == 0) {
+            sumaPares += numero;
+        } else {
+            cantImpares++;
         }
-        
-        if (p &gt; 0) cout &lt;&lt; "Perimetro: " &lt;&lt; p &lt;&lt; endl;
+        if (numero &lt; 0) {
+            cantNegativos++;
+        }
     }
+
+    cout &lt;&lt; "Suma de pares: " &lt;&lt; sumaPares &lt;&lt; endl;
+    cout &lt;&lt; "Cantidad de impares: " &lt;&lt; cantImpares &lt;&lt; endl;
+    cout &lt;&lt; "Cantidad de negativos: " &lt;&lt; cantNegativos &lt;&lt; endl;
+
     return 0;
 }
                         </code></pre>
@@ -731,6 +612,93 @@ int main() {
                         </div>
                         <iframe id="oc-editor-7"
                             src="https://onecompiler.com/embed/cpp?listenToEvents=true&theme=dark&hideLanguageSelection=true&hideTitle=true"></iframe>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Ejercicio Omega Facu -->
+            <section>
+                <section>
+                    <h2 class="slide-title">24623 - Código Enigma</h2>
+                    <div class="problem-statement">
+                        <p style="margin-top: 0;">La agencia de inteligencia ha interceptado una transmisión enemiga. El
+                            mensaje llegó como una sola cadena de texto compacta: sin espacios, sin signos de puntuación
+                            y sin pausas visibles. Los analistas saben que la transmisión esconde coordenadas numéricas
+                            clave, pero el método de cifrado era un misterio.</p>
+                        <p>Luego de semanas de intenso trabajo, el criptógrafo jefe logró reconstruir el algoritmo de
+                            descifrado. Dejó anotadas sus conclusiones en su diario de campo antes de desaparecer
+                            misteriosamente:</p>
+                        <p>
+                        <p>
+                            <em>
+                                "Cada letra del alfabeto inglés carga un peso según su posición en el abecedario,
+                                empezando desde cero. Es decir, la primera letra no vale nada (A=0), la segunda vale
+                                uno (B=1), y así sucesivamente hasta la última letra (Z=25), sin distinguir entre
+                                mayúsculas y minúsculas. Sin embargo, hay una letra que no actúa como las demás: no
+                                aporta peso alguno al mensaje, sino que sirve únicamente para separar la transmisión
+                                en bloques independientes: esta es la letra <strong>N</strong> (o
+                                <strong>n</strong>).
+                            </em>
+                        </p>
+                        <p>
+                            <em>
+                                Cada bloque se resuelve sumando el peso de todas sus letras. Pero el enemigo no usa
+                                esa suma directamente: aplica un filtro final que retiene solo ciertos dígitos del
+                                resultado y descarta las cifras que están en posiciones pares (contadas de izquierda
+                                a derecha en base 1). Al terminar de procesar todos los bloques de la transmisión,
+                                nos interesa encontrar el mayor valor resultante."
+                            </em>
+                        </p>
+                        </p>
+                        <p>Tu tarea es escribir un programa que ayude a la agencia a automatizar este descifrado y
+                            encontrar el mayor valor resultante de la transmisión.</p>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="slide-title">Solución del ejercicio</h2>
+                    <div style="width:100%">
+                        <pre><code class="cpp">
+
+#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+int main(int argc, char *argv[]) {
+	int NumBloque=0, Max=0, aux, cantCifras=1, MaxDelBloque=0, armarNum=1;
+	string Cadena;
+	cin&gt;&gt;Cadena;
+	for(int i=0;i&lt;Cadena.size();i++) { 
+		if(tolower(Cadena.at(i))!='n'){
+			Cadena.at(i)=tolower(Cadena.at(i));
+			NumBloque+=Cadena.at(i)-'a';
+		}
+		if(tolower(Cadena.at(i))=='n' or i==(Cadena.size()-1)){
+			aux=NumBloque;
+			while(aux&gt;9){
+				aux/=10;
+				cantCifras++;
+			}
+			for(int j=cantCifras;j&gt;0;j--) { 
+				if(j%2!=0){
+					MaxDelBloque+=(NumBloque%10*armarNum);
+					NumBloque/=10;
+					armarNum*=10;
+				}else{
+					NumBloque/=10;
+				}
+			}
+			if(MaxDelBloque&gt;Max){
+				Max=MaxDelBloque;
+			}
+			MaxDelBloque=0;
+			NumBloque=0;
+			cantCifras=1;
+			armarNum=1;
+		}
+	}
+	cout&lt;&lt;Max;
+	return 0;
+}
+                        </code></pre>
                     </div>
                 </section>
             </section>
@@ -764,7 +732,7 @@ int main() {
             controls: true,
             progress: true,
             center: true,
-            plugins: [ RevealHighlight ]
+            plugins: [RevealHighlight]
         });
 
         window.addEventListener('resize', () => {
@@ -777,12 +745,12 @@ int main() {
 
         // Configuración de OneCompiler - Variables
         const ej10Code = `#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string frase;\n    cout << "Entrada: ";\n    cin >> frase;\n\n    string primeros = frase.substr(0, 5);\n    string ultimos  = frase.substr(frase.length() - 5, 5);\n\n    cout << "Primeros 5: " << primeros << endl;\n    cout << "Últimos 5: "  << ultimos  << endl;\n    cout << "Concatenación: " << primeros + ultimos << endl;\n\n    return 0;\n}`;
-        const ej4Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int total, correctas;\n    cout << "Total de preguntas: ";\n    cin >> total;\n    cout << "Respuestas correctas: ";\n    cin >> correctas;\n\n    float porcentaje = (correctas * 100.0) / total;\n\n    if (porcentaje >= 90)\n        cout << "Nivel máximo" << endl;\n    else if (porcentaje >= 75)\n        cout << "Nivel medio" << endl;\n    else if (porcentaje >= 50)\n        cout << "Nivel regular" << endl;\n    else\n        cout << "Fuera de nivel" << endl;\n\n    return 0;\n}`;
+        const ej4Code = `#include <iostream>\nusing namespace std;\n\nint main(int argc, char *argv[]) {\n\tint edad;\n\tcin>>edad;\n\tif (edad<=3)\n\t\tcout<<"BEBE"<<endl;\n\telse\n\t\tif (edad>=4 && edad<=14)\n\t\t\tcout<<"NINO"<<endl;\n\t\telse\n\t\t\tif (edad>=15 && edad<=18)\n\t\t\t\tcout<<"JOVEN"<<endl;\n\t\t\telse\n\t\t\t\tif (edad>=19 && edad<=65)\n\t\t\t\t\tcout<<"ADULTO"<<endl;\n\t\t\t\telse\n\t\t\t\t\tif (edad>65)\n\t\t\t\t\t\tcout<<"ADULTO 3RA"<<endl;\n\treturn 0;\n}`;
         const ej7Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int num;\n    cout << "Ingrese un número de tres cifras: ";\n    cin >> num;\n\n    int centena = num / 100;\n    int unidad  = num % 10;\n\n    if (centena == unidad)\n        cout << num << " es capicúa" << endl;\n    else\n        cout << num << " no es capicúa" << endl;\n\n    return 0;\n}`;
         const ej6Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    float monto, total;\n    char pago;\n    cout << "Monto: ";\n    cin >> monto;\n    cout << "Pago (C, D, B): ";\n    cin >> pago;\n\n    if (pago == 'c' || pago == 'C') {\n        int cuotas;\n        cout << "Cuotas (1 o 3): ";\n        cin >> cuotas;\n        if (cuotas == 3) {\n            total = monto * 1.10;\n            cout << "Por cuota: $" << total / 3 << endl;\n        } else {\n            total = monto;\n        }\n    } else if (pago == 'd' || pago == 'D') {\n        if (monto > 3000) {\n            total = monto * 0.85;\n        } else {\n            total = monto;\n        }\n    } else if (pago == 'b' || pago == 'B') {\n        total = monto * 0.70;\n    }\n    cout << "Total: $" << total << endl;\n    return 0;\n}`;
         const ej5Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int dia, mes;\n    \n    cout << "Dia de la semana (1-7): "; cin >> dia;\n    cout << "Mes (1-12): "; cin >> mes;\n    \n    if (dia > 7 || dia < 1 || mes > 12 || mes < 1) {\n        cout << "Dia inexistente" << endl;\n    } else {\n        cout << "Dia: ";\n        switch(dia) {\n            case 1: cout << "Lunes"; break;\n            case 2: cout << "Martes"; break;\n            case 3: cout << "Miercoles"; break;\n            case 4: cout << "Jueves"; break;\n            case 5: cout << "Viernes"; break;\n            case 6: cout << "Sabado"; break;\n            case 7: cout << "Domingo"; break;\n        }\n        \n        switch(mes) {\n            case 1: cout << " y Enero\\n"; break;\n            case 2: cout << " y Febrero\\n"; break;\n            case 3: cout << " y Marzo\\n"; break;\n            case 4: cout << " y Abril\\n"; break;\n            case 5: cout << " y Mayo\\n"; break;\n            case 6: cout << " y Junio\\n"; break;\n            case 7: cout << " y Julio\\n"; break;\n            case 8: cout << " y Agosto\\n"; break;\n            case 9: cout << " y Septiembre\\n"; break;\n            case 10: cout << " y Octubre\\n"; break;\n            case 11: cout << " y Noviembre\\n"; break;\n            case 12: cout << " y Diciembre\\n"; break;\n        }\n    }\n    return 0;\n}`;
-        const ej9Code = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int numero;\n    cout << "Ingrese un numero (entre 0 y 9): ";\n    cin >> numero;\n    \n    switch (numero) {\n        case 0: cout << "1\\t";\n        case 1: cout << "2\\t";\n        case 2: cout << "3\\t";\n        case 3: cout << "4\\t";\n        case 4: cout << "5\\t";\n        case 5: cout << "6\\t";\n        case 6: cout << "7\\t";\n        case 7: cout << "8\\t";\n        case 8: cout << "9\\t";\n        case 9: cout << "10" << endl; break;\n        default: cout << "Fuera del rango" << endl;\n    }\n    return 0;\n}`;
-        const ej10Code2 = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int tipo;\n    float l1, l2, l3, p = 0;\n\n    cout << "1- Equilatero\\n2- Isoceles\\n3- Escaleno\\nTipo: ";\n    cin >> tipo;\n\n    if (tipo < 1 || tipo > 3) {\n        cout << "Opcion invalida." << endl;\n    } else {\n        switch (tipo) {\n            case 1:\n                cout << "Lado: "; cin >> l1;\n                if (l1 <= 0) cout << "El valor debe ser positivo." << endl;\n                else p = l1 * 3;\n                break;\n            case 2:\n                cout << "Lado repetido: "; cin >> l1;\n                cout << "Lado distinto: "; cin >> l2;\n                if (l1 <= 0 || l2 <= 0) cout << "Debe ser positivo." << endl;\n                else p = l1 * 2 + l2;\n                break;\n            case 3:\n                cout << "Lado 1: "; cin >> l1;\n                cout << "Lado 2: "; cin >> l2;\n                cout << "Lado 3: "; cin >> l3;\n                if (l1 <= 0 || l2 <= 0 || l3 <= 0) cout << "Positivos." << endl;\n                else p = l1 + l2 + l3;\n                break;\n        }\n        \n        if (p > 0) cout << "Perimetro: " << p << endl;\n    }\n    return 0;\n}`;
+        const ej9Code = `#include <iostream>\nusing namespace std;\nvoid piramide (int);\nint main(int argc, char *argv[]) {\n\tint N;\n\tcin>>N;\n\tif (N>=1 && N<=100){\n\t\tpiramide (N);\n\t}\n\treturn 0;\n}\n\nvoid piramide(int N){\n\tfor(int n1=1;n1<=N;n1++){\n\t\t\n\t\tfor(int n2=N;n1<n2;n2--){\n\t\t\tcout<<" ";\n\t\t}\n\t\t\n\t\tint n3=0;\n\t\tdo{\n\t\t\tcout<<'*';\n\t\t\tn3++;\n\t\t} while(n3!=n1*2-1);\n\t\tcout<<endl;\n\t}\n}`;
+        const ej10Code2 = `#include <iostream>\nusing namespace std;\n\nint main() {\n    int numero;\n    int sumaPares = 0;\n    int cantImpares = 0;\n    int cantNegativos = 0;\n\n    cout << "Ingrese numeros (Ctrl+Z para terminar): " << endl;\n    while (cin >> numero) {\n        if (numero % 2 == 0) {\n            sumaPares += numero;\n        } else {\n            cantImpares++;\n        }\n        if (numero < 0) {\n            cantNegativos++;\n        }\n    }\n\n    cout << "Suma de pares: " << sumaPares << endl;\n    cout << "Cantidad de impares: " << cantImpares << endl;\n    cout << "Cantidad de negativos: " << cantNegativos << endl;\n\n    return 0;\n}`;
 
         function sendCode(iframeId, code) {
             const iframe = document.getElementById(iframeId);
